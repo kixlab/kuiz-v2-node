@@ -22,7 +22,8 @@ const userSchema = new mongoose.Schema({
                 type: mongoose.Schema.ObjectId,
                 ref: "Class"
             }
-        ]
+        ],
+        default:["test101"]
     },
     madeStems:{
         type:[
