@@ -1,4 +1,4 @@
-const Problem = require('../../db/problem')
+const Qstem = require('../../db/qstem')
 const Class = require('../../db/class')
 
 const loadProblemListMiddleware = (req,res) => {
@@ -11,9 +11,9 @@ const loadProblemListMiddleware = (req,res) => {
             })
         }
         else {
-            Problem.find({_id:{"$in":data.problems}}).then((data)=>{
+            Qstem.find({_id:{"$in":data.qstems}}).then((data2)=>{
                 res.json({
-                    problems:{problemList:data, success: true, msg:"sucess"}
+                    qstems:{problemList:data2, success: true, msg:"sucess"}
                 })
             })
             .catch((err) => console.log("ERR:",err))
