@@ -20,6 +20,12 @@ const qstemSchema = new mongoose.Schema({
     material: {
         type: String
     },
+    optionSets:{
+        type: [{
+            type: mongoose.Schema.ObjectId,
+            ref:"OptionSet"
+        }]
+    }
     },
     {
         timestamps: true,

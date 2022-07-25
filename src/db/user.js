@@ -25,24 +25,24 @@ const userSchema = new mongoose.Schema({
         ],
         default:["test101"]
     },
-    madeStems:{
-        type:[
-            {
-                type: mongoose.Schema.ObjectId,
-                ref: "Qstem"
-            }
-        ],
-        default:[]
-    },
-    madeOptions:{
-        type:[
-            {
-                type: mongoose.Schema.ObjectId,
-                ref: "Option"
-            }
-        ],
-        default:[]
-    }
+    // madeStems:{
+    //     type:[
+    //         {
+    //             type: mongoose.Schema.ObjectId,
+    //             ref: "Qstem"
+    //         }
+    //     ],
+    //     default:[]
+    // },
+    // madeOptions:{
+    //     type:[
+    //         {
+    //             type: mongoose.Schema.ObjectId,
+    //             ref: "Option"
+    //         }
+    //     ],
+    //     default:[]
+    // }
 })
 
 module.exports = mongoose.model("User", userSchema);

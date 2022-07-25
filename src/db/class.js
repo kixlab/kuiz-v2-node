@@ -16,6 +16,12 @@ const classSchema = new mongoose.Schema({
             type: mongoose.Schema.ObjectId,
             ref:"Problem"
         }]
+    },
+    qstems:{
+       type:[{
+           type: mongoose.Schema.ObjectId,
+           ref:"Qstem"
+       }] 
     }
 })
 
