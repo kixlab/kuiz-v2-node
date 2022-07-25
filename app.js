@@ -1,6 +1,14 @@
-var express = require('express')
-var app = express()
+// require("dotnev").config();
+const express = require('express');
+const app = express();
+const port = 4000;
 
-app.listen(4000, function() {
-    console.log("Hello express")
-})
+app.get('/', (req, res) => {
+    res.json({
+        success: true,
+    });
+});
+
+app.listen(port, () => {
+    console.log(`server is listening at localhost:${port}`);
+});
