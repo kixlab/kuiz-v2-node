@@ -7,7 +7,7 @@ const loadProblemListMiddleware = (req,res) => {
         if(err){
             console.log("err msg:",err)
             return res.status(400).json({
-                error:"err"
+                error:"err in loadProblemListMiddleware"
             })
         }
         else {
