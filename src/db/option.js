@@ -1,6 +1,18 @@
 var mongoose = require("mongoose")
 const { options } = require("nodemon/lib/config")
 
+const SuggestionSchema = new mongoose.Schema({
+    author:{
+        type: mongoose.Schema.ObjectId,
+        ref:"User"
+    },
+    suggestion_text :{
+        type: String
+    },
+    likes:{
+        type: Int
+    }
+})
 const optionSchema = new mongoose.Schema({
     author:{
         type:mongoose.Schema.ObjectId,
@@ -25,7 +37,15 @@ const optionSchema = new mongoose.Schema({
     class: {
         type: mongoose.Schema.ObjectId,
         ref:"Class"
+    },
+    qstem:{
+        type: mongoose.Schema.ObjectId,
+        ref:"Qstem"
+    },
+    suggesetions:{
+        type: SuggestionSchema
     }
+
 })
 
 module.exports = mongoose.model("Option", optionSchema)

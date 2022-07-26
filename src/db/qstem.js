@@ -20,6 +20,14 @@ const qstemSchema = new mongoose.Schema({
     material: {
         type: String
     },
+    class: {
+        type: mongoose.Schema.ObjectId,
+        ref:"Class"
+    },
+    options: {
+        type: mongoose.Schema.ObjectId,
+        ref:"Option"
+    },
     optionSets:{
         type: [{
             type: mongoose.Schema.ObjectId,
