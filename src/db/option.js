@@ -10,7 +10,7 @@ const SuggestionSchema = new mongoose.Schema({
         type: String
     },
     likes:{
-        type: Int
+        type: Number
     }
 })
 const optionSchema = new mongoose.Schema({
@@ -28,7 +28,7 @@ const optionSchema = new mongoose.Schema({
         trim: true
     },
     likes:{
-        type: Int
+        type: Number
     },
     is_answer:{
         type: Boolean,
