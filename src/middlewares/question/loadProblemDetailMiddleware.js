@@ -4,7 +4,7 @@ const { ObjectId } = require('mongodb');
 const { off } = require('../../db/user');
 
 const loadProblemDetailMiddleware = (req,res) => {
-    const qid = req.data.qid
+    const qid = req.body.qid
     Qstem.findById(ObjectId(qid),(err, data) => {
         if(err) {
             console.log("err msg:",err)

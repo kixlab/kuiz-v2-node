@@ -3,7 +3,7 @@ const Qstem = require('../../../db/qstem')
 const {ObjectId} = require('mongodb')
 
 const makeOptionMiddleware = (req, res) => {
-    const optionData = req.data.optionData
+    const optionData = req.body.optionData
     const option = new Option(optionData)
 
     const saveOptiontoStem = (data) => {

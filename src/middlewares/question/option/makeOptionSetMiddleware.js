@@ -1,8 +1,7 @@
-const Option = require('../../../db/option')
 const OptionSet = require('../../../db/optionSet')
-
+ㄴ
 const makeOptionSetMiddleware = (req, res) => {
-    const optionSetData = req.data.optionSetData
+    const optionSetData = req.body.optionSetData
     const optionSet = new OptionSet(optionSetData)
 
     optionSet.save((err, data) => {

@@ -5,16 +5,10 @@ const classSchema = new mongoose.Schema({
         type:String,
         default:"test101"
     },
-    participants:{
+    students:{
         type:[{
             type: mongoose.Schema.ObjectId,
             ref:"User"
-        }]
-    },
-    problems:{
-        type:[{
-            type: mongoose.Schema.ObjectId,
-            ref:"Problem"
         }]
     },
     qstems:{

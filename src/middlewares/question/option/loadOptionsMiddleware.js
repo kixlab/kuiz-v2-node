@@ -3,7 +3,7 @@ const Qstem = require('../../../db/qstem')
 const { ObjectId } = require('mongodb');
 
 const loadOptionsMiddleware = (req,res) => {
-    const qid = req.data.qid
+    const qid = req.body.qid
     Qstem.findById(ObjectId(qid),(err, data) => {
         if(err) {
             console.log("err msg:",err)
