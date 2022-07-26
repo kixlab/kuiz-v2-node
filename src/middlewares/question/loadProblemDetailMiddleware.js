@@ -15,10 +15,12 @@ const loadProblemDetailMiddleware = (req,res) => {
             if (optionSets.length !=0) {
                 const optionSet = data.optionSets[0]
             } else {
-                
+
             }
              
         }
     })
 
 }
+
+module.exports = loadProblemDetailMiddleware

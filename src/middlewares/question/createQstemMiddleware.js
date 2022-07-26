@@ -5,7 +5,7 @@ const User = require('../../db/user')
 const createQstemMiddleware = (req,res) => {
     var qstemObj = req.data.qstemObj
     var classCode = "test101"
-    const qstem = new Qstem(qstem)
+    const qstem = new Qstem(qstemObj)
 
     const saveToClass = (data) => {
         if(data === null) {
