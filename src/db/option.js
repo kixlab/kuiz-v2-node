@@ -43,7 +43,9 @@ const optionSchema = new mongoose.Schema({
         ref:"Qstem"
     },
     suggesetions:{
-        type: SuggestionSchema
+        type: [{
+            type:SuggestionSchema
+        }]
     }
 
 })

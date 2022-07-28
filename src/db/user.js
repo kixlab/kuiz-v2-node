@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
                 ref: "Class"
             }
         ],
-        default:["test101"]
+        default:[]
     },
     // madeStems:{
     //     type:[
