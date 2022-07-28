@@ -25,8 +25,10 @@ const qstemSchema = new mongoose.Schema({
         ref:"Class"
     },
     options: {
-        type: mongoose.Schema.ObjectId,
-        ref:"Option"
+        type: [{
+            type: mongoose.Schema.ObjectId,
+            ref:"Option"
+        }]
     },
     optionSets:{
         type: [{
