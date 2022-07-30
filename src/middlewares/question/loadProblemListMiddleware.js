@@ -3,7 +3,7 @@ const Class = require('../../db/class')
 
 const loadProblemListMiddleware = (req,res) => {
     const classCode = "test101"
-    Class.findOne({code:classCode},(err,data)=>{
+    Class.findOne({code:classCode},(err,data) => {
         if(err){
             console.log("err msg:",err)
             return res.status(400).json({
