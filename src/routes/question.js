@@ -15,7 +15,7 @@ router.post("/option/create", makeOption)
 router.post("/optionset/create", makeOptionSet)
 
 router.post("/qstem/create", createQstem)
-router.get("/detail/load/:qid", loadProblemDetail)
+router.get("/detail/load", loadProblemDetail)
 router.get("/list/load", loadProblemList)
 
 
