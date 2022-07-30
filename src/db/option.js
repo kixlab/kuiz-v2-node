@@ -46,6 +46,12 @@ const optionSchema = new mongoose.Schema({
         type: [{
             type:SuggestionSchema
         }]
+    },
+    includedSet:{
+        type:[{
+            type:mongoose.Schema.ObjectId,
+            ref:"OptionSet"
+        }]
     }
 
 })
