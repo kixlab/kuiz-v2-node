@@ -1,5 +1,16 @@
 var mongoose = require('mongoose')
 
+const solvedSchema = new mongoose.Schema({
+    question:{
+        type: mongoose.Schema.ObjectId,
+        ref:"Qstem"
+    },
+    initAnswer:{
+        type:mongoose.Schema.ObjectId,
+        ref:"Option"
+    }
+})
+
 const userSchema = new mongoose.Schema({
     name:{
         type: String,
@@ -25,24 +36,27 @@ const userSchema = new mongoose.Schema({
         ],
         default:[]
     },
-    // madeStems:{
-    //     type:[
-    //         {
-    //             type: mongoose.Schema.ObjectId,
-    //             ref: "Qstem"
-    //         }
-    //     ],
-    //     default:[]
-    // },
-    // madeOptions:{
-    //     type:[
-    //         {
-    //             type: mongoose.Schema.ObjectId,
-    //             ref: "Option"
-    //         }
-    //     ],
-    //     default:[]
-    // }
+    made : {
+        type:[
+            {
+                type: mongoose.Schema.ObjectId,
+                ref: "Qstem"
+            }
+        ],
+        default:[]
+    },
+    madeOptions:{
+        type:[
+            {
+                type: mongoose.Schema.ObjectId,
+                ref: "Option"
+            }
+        ],
+        default:[]
+    },
+    solved:{
+        type: [solvedSchema]
+    }
 })
 
 module.exports = mongoose.model("User", userSchema);
