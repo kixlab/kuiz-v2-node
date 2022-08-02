@@ -28,7 +28,8 @@ const optionSchema = new mongoose.Schema({
         trim: true
     },
     likes:{
-        type: Number
+        type: Number,
+        default:0
     },
     is_answer:{
         type: Boolean,
@@ -45,13 +46,15 @@ const optionSchema = new mongoose.Schema({
     suggesetions:{
         type: [{
             type:SuggestionSchema
-        }]
+        }],
+        default:[]
     },
     includedSet:{
         type:[{
             type:mongoose.Schema.ObjectId,
             ref:"OptionSet"
-        }]
+        }],
+        default:[]
     }
 
 })

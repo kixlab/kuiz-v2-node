@@ -7,10 +7,11 @@ const makeOptionMiddleware = (req, res) => {
     const option = new Option(optionData)
 
     const saveOptiontoStem = (data) => {
-        Qstem.updateOne({_id:ObjectId(data.qid)}, {$push: {options:option._id}}, (err, data2) => {
+        Qstem.updateOne({_id:ObjectId(data._id)}, {$push: {options:option._id}}, (err, data2) => {
             if(err) throw err;
             else {
-                res.jso({
+                console.log("ADDED!")
+                res.json({
                     msg: "Saved Option",
                     success: true
                 })
