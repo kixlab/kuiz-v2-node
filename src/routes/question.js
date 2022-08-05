@@ -9,8 +9,10 @@ var makeSuggestion = require('../middlewares/question/option/makeSuggestionMiddl
 var createQstem = require('../middlewares/question/createQstemMiddleware')
 var loadProblemDetail = require('../middlewares/question/loadProblemDetailMiddleware')
 var loadProblemList = require('../middlewares/question/loadProblemListMiddleware')
+var loadOptionDetail = require('../middlewares/question/option/loadOptionDetailMiddleware')
 
 router.get("/option/load", loadOptions)
+router.get("/optiondetail/load",loadOptionDetail)
 router.post("/option/create", makeOption)
 router.post("/optionset/create", makeOptionSet)
 
