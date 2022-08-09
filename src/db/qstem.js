@@ -9,6 +9,10 @@ const qstemSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    raw_string:{
+        type: String,
+        required: true
+    },
     action_verb:{
         type: [String],
         default: []

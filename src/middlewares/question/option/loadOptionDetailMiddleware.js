@@ -2,7 +2,6 @@ const Option = require('../../../db/option')
 const { ObjectId } = require('mongodb');
 
 const loadOptionDetailMiddleware = (req,res) => {
-    console.log("DATA:",req.query)
     const oid = req.query.oid
     Option.findById(ObjectId(oid),(err, data) => {
         if(err) {

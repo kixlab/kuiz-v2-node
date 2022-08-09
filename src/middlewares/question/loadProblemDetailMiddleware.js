@@ -30,9 +30,11 @@ const loadProblemDetailMiddleware = (req,res) => {
                 
             } else {
                 res.json({
-                    success:false,
-                    msg:"no option set",
-                    data:{}
+                    msg:"no optionSets",
+                    success:true,
+                    data:{
+                        qinfo: data,
+                    }
                 })
             }
              
