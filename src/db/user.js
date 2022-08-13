@@ -56,6 +56,10 @@ const userSchema = new mongoose.Schema({
     },
     solved:{
         type: [solvedSchema]
+    },
+    isAdmin:{
+        type: Boolean,
+        default:false
     }
 })
 

@@ -12,15 +12,12 @@ const joinClassMiddleware = (req, res, next) => {
             return res.json({ msg: "No such class", success: false });
         } else {
             if (code == data.code) {
-                console.log("ID:",_id)
-                console.log("Email:",userEmail)
                 Class.findOneAndUpdate({ code: code }, { $push: { students: ObjectId(_id) } }, (err, data2) => {
                     
                     if (err) throw err;
                     else {
                         User.findOneAndUpdate({ _id: ObjectId(_id) }, { $push: { classes: data2._id } })
                             .then((data3) => {
-                                console.log("data3::",data3)
                                 res.json({
                                     msg: "Joined class",
                                     success: true,

@@ -11,7 +11,6 @@ const registerMiddleware = (req, res) => {
       });
     } else {
       if (user) {
-        console.log("CID:",user.classes[0])
         const { _id, name, email, classes, imageUrl } = user;
         res.json({
           success:true,

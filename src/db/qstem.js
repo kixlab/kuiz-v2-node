@@ -21,6 +21,10 @@ const qstemSchema = new mongoose.Schema({
         type: [String],
         default:[]
     },
+    learning_objective:{
+        type: String,
+        default:""
+    },
     material: {
         type: String
     },

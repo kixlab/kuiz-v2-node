@@ -5,7 +5,7 @@ const { ObjectId } = require('mongodb');
 
 const loadProblemListMiddleware = (req,res) => {
     const classCode = req.query.cid
-    console.log("ClassCode:",classCode)
+    console.log("classscode:",req.query.cid)
     Class.findById(ObjectId(classCode),(err,data) => {
         if(err){
             res.json({

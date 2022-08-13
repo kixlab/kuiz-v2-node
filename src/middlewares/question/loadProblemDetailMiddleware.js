@@ -9,7 +9,6 @@ const loadProblemDetailMiddleware = (req,res) => {
     const qid = req.query.qid
     Qstem.findById(ObjectId(qid),(err, data) => {
         if(err) {
-            console.log("err msg:",err)
             return res.status(400).json({
                 error:"err in loadProblemDetailMiddleware"
             })
