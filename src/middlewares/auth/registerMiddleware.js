@@ -1,7 +1,4 @@
 const User = require("../../db/user");
-const crypto = require("crypto");
-const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
 
 const registerMiddleware = (req, res) => {
   const name = req.body.name;
@@ -16,6 +13,7 @@ const registerMiddleware = (req, res) => {
       if (user) {
         const { _id, name, email, classes, imageUrl } = user;
         res.json({
+          new: false,
           user: { _id, name, email, classes, imageUrl },
         });
       } else {
@@ -27,6 +25,7 @@ const registerMiddleware = (req, res) => {
             });
           } else {
                 res.json({
+                    new: true,
                     user: newUser,
                     success: true
                 });

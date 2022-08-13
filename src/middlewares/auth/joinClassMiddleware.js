@@ -1,5 +1,6 @@
 const { ObjectId } = require('mongodb');
 const User = require('../../db/user')
+const Class = require('../../db/class')
 
 const joinClassMiddleware = (req, res, next) => {
     const userEmail = req.body.userEmail;
@@ -11,14 +12,19 @@ const joinClassMiddleware = (req, res, next) => {
             return res.json({ msg: "No such class", success: false });
         } else {
             if (code == data.code) {
-                Class.updateOne({ code: code }, { $push: { students: ObjectId(_id) } }, (err, data2) => {
+                console.log("ID:",_id)
+                console.log("Email:",userEmail)
+                Class.findOneAndUpdate({ code: code }, { $push: { students: ObjectId(_id) } }, (err, data2) => {
+                    
                     if (err) throw err;
                     else {
-                        User.updateOne({ email: userEmail }, { $push: { classes: [code] } })
+                        User.findOneAndUpdate({ _id: ObjectId(_id) }, { $push: { classes: data2._id } })
                             .then((data3) => {
+                                console.log("data3::",data3)
                                 res.json({
                                     msg: "Joined class",
-                                    success: true
+                                    success: true,
+                                    cid:data2._id
                                 })
                             })
                             .catch((err) => { throw err; })
@@ -26,7 +32,7 @@ const joinClassMiddleware = (req, res, next) => {
                 })
             } else {
                 res.json({
-                    msg: "Failed to join group",
+                    msg: "Entered invalid class code",
                     success: false
                 })
             }
