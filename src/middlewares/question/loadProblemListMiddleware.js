@@ -1,13 +1,16 @@
 const Qstem = require('../../db/qstem')
 const Class = require('../../db/class')
+const { ObjectId } = require('mongodb');
+
 
 const loadProblemListMiddleware = (req,res) => {
-    const classCode = "test101"
-    Class.findOne({code:classCode},(err,data) => {
+    const classCode = req.query.cid
+    console.log("ClassCode:",classCode)
+    Class.findById(ObjectId(classCode),(err,data) => {
         if(err){
-            console.log("err msg:",err)
-            return res.status(400).json({
-                error:"err in loadProblemListMiddleware"
+            res.json({
+                success:false,
+                error:"undefined class code"
             })
         }
         else {
