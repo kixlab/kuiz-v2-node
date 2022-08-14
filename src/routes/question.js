@@ -10,11 +10,13 @@ var createQstem = require('../middlewares/question/createQstemMiddleware')
 var loadProblemDetail = require('../middlewares/question/loadProblemDetailMiddleware')
 var loadProblemList = require('../middlewares/question/loadProblemListMiddleware')
 var loadOptionDetail = require('../middlewares/question/option/loadOptionDetailMiddleware')
+var setOptionDependencyMiddleware = require('../middlewares/question/option/setOptionDependencyMiddleware')
 
 router.get("/option/load", loadOptions)
 router.get("/optiondetail/load",loadOptionDetail)
 router.post("/option/create", makeOption)
 router.post("/optionset/create", makeOptionSet)
+router.post("/option/dependency", setOptionDependencyMiddleware)
 
 router.post("/qstem/create", createQstem)
 router.get("/detail/load", loadProblemDetail)

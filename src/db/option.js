@@ -55,6 +55,20 @@ const optionSchema = new mongoose.Schema({
             ref:"OptionSet"
         }],
         default:[]
+    },
+    plausible:{
+        type: Object,
+        default:{
+            similar:[],
+            difference:[]
+        }
+    },
+    dependency:{
+        type:Object,
+        default:{
+            same:[],
+            contradictory:[]
+        }
     }
 
 })

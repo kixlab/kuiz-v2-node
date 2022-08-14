@@ -16,6 +16,9 @@ const classSchema = new mongoose.Schema({
            type: mongoose.Schema.ObjectId,
            ref:"Qstem"
        }] 
+    },
+    classType:{
+        type: Boolean
     }
 })
 

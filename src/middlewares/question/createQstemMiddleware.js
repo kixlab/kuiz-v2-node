@@ -13,14 +13,20 @@ const createQstemMiddleware = (req,res) => {
         if(data === null) {
             return res.json({msg:"No such class", success: false});
         } else {
-            Class.updateOne({_id:ObjectId(classCode)}, {$push: {qstems:qstem._id}}, (err,data2) => { // TODO: array push 해야하는지 element wise push 해야하는지 확인해보기]
+            Class.updateOne({_id:ObjectId(classCode)}, {$push: {qstems:qstem._id}}, (err,data2) => { 
                 if(err) throw err;
                 else {
-                    res.json({
-                        msg:"created question",
-                        success: true,
-                        data: qstem._id
+                    User.findByIdAndUpdate(qstem.author,{$push:{made:qstem._id}}, (err, data3) => {
+                        if(err) throw err;
+                        else {
+                            res.json({
+                                msg:"created question",
+                                success: true,
+                                data: qstem._id
+                            })
+                        }
                     })
+                    
                 }
             })
         }

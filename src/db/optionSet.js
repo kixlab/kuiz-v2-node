@@ -14,6 +14,10 @@ const optionSetSchema = new mongoose.Schema({
     class:{
         type: mongoose.Schema.ObjectId,
         ref:"Class"
+    },
+    answer:{
+        type: mongoose.Schema.ObjectId,
+        ref:"Option"
     }
 })
 
