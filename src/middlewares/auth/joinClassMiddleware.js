@@ -21,7 +21,8 @@ const joinClassMiddleware = (req, res, next) => {
                                 res.json({
                                     msg: "Joined class",
                                     success: true,
-                                    cid:data2._id
+                                    cid:data2._id,
+                                    cType:data2.classType
                                 })
                             })
                             .catch((err) => { throw err; })

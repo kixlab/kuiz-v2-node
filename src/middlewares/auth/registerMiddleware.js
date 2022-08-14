@@ -1,4 +1,5 @@
 const User = require("../../db/user");
+const Class = require("../../db/class")
 
 const registerMiddleware = (req, res) => {
   const name = req.body.name;
@@ -11,12 +12,17 @@ const registerMiddleware = (req, res) => {
       });
     } else {
       if (user) {
-        const { _id, name, email, classes, imageUrl } = user;
-        res.json({
-          success:true,
-          new: false,
-          user: { _id, name, email, classes, imageUrl },
-        });
+        Class.findById(classes[0], (err, data2) => {
+          if(err) throw errl
+          else {
+            res.json({
+              success:true,
+              new: false,
+              user: user,
+              cType: data2.classType
+            })
+          }
+        })
       } else {
         let newUser = new User({ name, email, imageUrl });
         newUser.save((err, data) => {

@@ -13,12 +13,25 @@ const loadProblemListMiddleware = (req,res) => {
             })
         }
         else {
-            Qstem.find({_id:{"$in":data.qstems}}).then((data2)=>{
-                res.json({
-                    qstems:{problemList:data2, success: true, msg:"sucess"}
+            if(data.qstems) {
+                Qstem.find({_id:{"$in":data.qstems}}).then((data2)=>{
+                    res.json({
+                        qstems:{problemList:data2, success: true, msg:"sucess"}
+                    })
                 })
-            })
-            .catch((err) => console.log("ERR:",err))
+                .catch((err) => console.log("ERR:",err))
+            }
+            else {
+                console.log("no qstem yet") 
+                res.json({
+                    qstems:{
+                        problemList:[],
+                        success:true,
+                        msg:"no qstem yet"
+                    }
+                })
+            }
+            
         }
     })
 }

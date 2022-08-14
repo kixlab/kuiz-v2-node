@@ -43,6 +43,9 @@ const qstemSchema = new mongoose.Schema({
             type: mongoose.Schema.ObjectId,
             ref:"OptionSet"
         }]
+    },
+    explanation:{
+        type: String
     }
     },
     {

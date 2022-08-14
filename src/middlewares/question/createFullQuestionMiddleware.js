@@ -1,57 +1,71 @@
-// const Qstem = require('../../db/qstem')
-// const Class = require('../../db/class');
-// const User = require('../../db/user');
-// const Option = require('../../db/option')
+const Qstem = require('../../db/qstem')
+const Class = require('../../db/class');
+const User = require('../../db/user');
+const Option = require('../../db/option')
+const ObjectId = require('mongodb').ObjectId
 
-// const createFullQuestionMiddleware = (req, res) => {
 
-//     var quizData = req.body.quizData;
-//     const classId = req.body.classId;
-//     const question = new Question(quizData)
 
-//     const saveToClass = (data) =>{
-//         console.log("classData",data)
-//         if (data === null) {
-//             return res.json({ msg: "No such class", success: false });
-//         } else {
-//             if (classId == data.joinCode) {
-//                 Class.updateOne({ joinCode: classId }, { $push: { questions: question._id } }, (err, data2) => {
-//                     if (err) throw err;
-//                     else {
-//                         //update userSchema
-//                         User.updateOne({ _id: quizData.author }, { $push: { made: [question._id] } })
-//                             .then((data3) => {
-//                                 res.json({
-//                                     msg: "created question",
-//                                     success: true,
-//                                     data:question._id
-//                                 })
-//                             })
-//                             .catch((err) => { throw err; })
-//                     }
-//                 })
-//             } else {
-//                 res.json({
-//                     msg: "Failed to create question",
-//                     success: false
-//                 })
-//             }
-//         }
-//     }
 
-//     question.save((err, data) => {
-//                     if (err) {
-//                         console.log("err:", err)
-//                         return res.status(400).json({
-//                             error: "something wrong"
-//                         })
-//                     }
-//                     console.log("data!!",data)
-//                     Class.findOne({ joinCode: classId})
-//                     .then(saveToClass)
-//                     .catch((err) => { throw err });
-//                 })
-// }
+const createFullQuestionMiddleware = (req, res) => {
+    /*
+    logic
+    - 불러올 것 : option List(어떤 index가 정답인지에 대한 정보), question Info(author, qstem HTML, qstem string, class), 
+    - option들을 저장한다
+    - option Set에 option id를 정답 option id와 함께 저장한다
+    - qstem object를 만들어 qstem에 저장한다
+    - class와 user info에 qstem을 push 해준다. 
+    */
 
-// module.exports = createFullQuestionMiddleware
+    const optionList = req.body.optionList
+    const qinfo = req.body.qInfo
+    const authorId = qinfo.author
+    const cid = req.body.cid
+    var savedOptions
+    var answerId
+
+    async function saveOptions(options) {
+        savedOptions = await options.map(o => {
+            const newOption = new Option(o)
+            newOption.save((err, data) => {
+                if(err) throw err;
+                else {
+                    // if(data.is_answer) {
+                    //     answerId = data._id
+                    // }
+                    return data._id
+                }
+            })
+        })
+        // const newOptionSet = new optionSet()
+        qinfo['options'] = savedOptions
+        const newQuestion = new Qstem(qinfo)
+        newQuestion.save((err, data) => {
+            if(err) throw err;
+            else {
+                Class.findByIdAndUpdate(ObjectId(cid),{$push:{qstems:data._id}},(err, data2) => {
+                    if(err) throw err;
+                    else {
+                        User.findByIdAndUpdate(ObjectId(authorId), {$push:{made:data._id}},(err, data3) => {
+                            if(err) throw err;
+                            else {
+                                res.json({
+                                    success:true,
+                                    question:data
+                                })
+                            }
+                        })
+                    }
+                })
+            }
+        })
+    }
+
+    saveOptions(optionList)
+
+
+
+}
+
+module.exports = createFullQuestionMiddleware
 
