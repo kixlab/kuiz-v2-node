@@ -12,7 +12,7 @@ const registerMiddleware = (req, res) => {
       });
     } else {
       if (user) {
-        Class.findById(classes[0], (err, data2) => {
+        Class.findById(user.classes[0], (err, data2) => {
           if(err) throw errl
           else {
             res.json({
