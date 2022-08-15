@@ -6,9 +6,9 @@ const solvedQuestionMiddleware = (req, res) => {
     const initAns = req.body.initAns
     const qid = req.body.qid
     const optionSet = req.body.optionSet
-    const solved = {question:ObjectId(qid), history:{optionSet:optionSet, initAns:ObjectId(initAns)}}
-    console.log("Solved:",solved)
-    console.log("user:", ObjectId(uid))
+    const isCorrect = req.body.isCorrect 
+    const solved = {question:ObjectId(qid), history:{optionSet:optionSet, initAns:ObjectId(initAns), isCorrect:isCorrect}}
+
     User.findByIdAndUpdate(ObjectId(uid), { $push : { solved : [solved] } },(err, data) => {
         if(err) throw err;
         res.json({

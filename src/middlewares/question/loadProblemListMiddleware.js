@@ -1,5 +1,6 @@
 const Qstem = require('../../db/qstem')
 const Class = require('../../db/class')
+const User = require('../../db/user')
 const { ObjectId } = require('mongodb');
 
 

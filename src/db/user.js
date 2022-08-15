@@ -15,6 +15,9 @@ const solvedSchema = new mongoose.Schema({
             initAns:{
                 type: mongoose.Schema.ObjectId,
                 ref:"Option"
+            },
+            isCorrect:{
+                type:Boolean
             }
         }
     }
