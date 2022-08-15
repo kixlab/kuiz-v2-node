@@ -7,7 +7,6 @@ const loadCreatedOptionMiddleware = (req,res) => {
     const uid = req.body.uid
     User.findById(ObjectId(uid)).then(
         (data) => {
-            console.log("Data:",data.madeOptions)
             Option.find({_id:{$in:data.madeOptions}}).then((data2) => {
                 res.json({
                     madeOption:data2,
