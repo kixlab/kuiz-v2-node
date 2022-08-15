@@ -47,7 +47,14 @@ const qstemSchema = new mongoose.Schema({
     explanation:{
         type: String,
         default:""
-    }
+    },
+    contributor:{
+        type:[{
+            type: mongoose.Schema.ObjectId,
+            ref:"User"
+        }],
+        default:[]
+    },
     },
     {
         timestamps: true,

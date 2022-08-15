@@ -6,4 +6,4 @@ const checkIsInClassMiddleware = (req, res) => {
 
 }
 
-module.exports = joinClassMiddleware;
+module.exports = checkIsInClassMiddleware;

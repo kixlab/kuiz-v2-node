@@ -14,12 +14,14 @@ var setOptionDependencyMiddleware = require('../middlewares/question/option/setO
 
 // un-modularized version
 var createFullQuestionMiddleware = require('../middlewares/question/createFullQuestionMiddleware')
+var solvedQuestionMiddleware = require('../middlewares/question/solveQuestionMiddleware')
 
 router.get("/option/load", loadOptions)
 router.get("/optiondetail/load",loadOptionDetail)
 router.post("/option/create", makeOption)
 router.post("/optionset/create", makeOptionSet)
 router.post("/option/dependency", setOptionDependencyMiddleware)
+router.post("/solve",solvedQuestionMiddleware)
 
 router.post("/qstem/create", createQstem)
 router.get("/detail/load", loadProblemDetail)
