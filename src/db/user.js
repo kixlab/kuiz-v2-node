@@ -5,9 +5,13 @@ const solvedSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref:"Qstem"
     },
-    initAnswer:{
-        type:mongoose.Schema.ObjectId,
-        ref:"Option"
+    ansHistory:{
+        type:[
+            {
+                type : mongoose.Schema.ObjectId,
+                ref : "Option"
+            }
+        ]
     }
 })
 

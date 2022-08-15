@@ -21,25 +21,17 @@ const createFullQuestionMiddleware = (req, res) => {
     const qinfo = req.body.qInfo
     const authorId = qinfo.author
     const cid = req.body.cid
-    var savedOptions
-    var answerId
 
     async function saveOptions(options) {
-        savedOptions = await options.map(o => {
-            const newOption = new Option(o)
-            newOption.save((err, data) => {
-                if(err) throw err;
-                else {
-                    // if(data.is_answer) {
-                    //     answerId = data._id
-                    // }
-                    return data._id
-                }
-            })
-        })
-        // const newOptionSet = new optionSet()
-        qinfo['options'] = savedOptions
-        const newQuestion = new Qstem(qinfo)
+        const savedOptions = await Promise.all(options.map( async (o) => {
+            const newOption = await new Option(o)
+            const data = await newOption.save()
+            return data._id
+        }))
+
+        qinfo["options"] = savedOptions
+        
+        const newQuestion = await new Qstem(qinfo)
         newQuestion.save((err, data) => {
             if(err) throw err;
             else {
