@@ -11,6 +11,7 @@ var loadProblemDetail = require('../middlewares/question/loadProblemDetailMiddle
 var loadProblemList = require('../middlewares/question/loadProblemListMiddleware')
 var loadOptionDetail = require('../middlewares/question/option/loadOptionDetailMiddleware')
 var setOptionDependencyMiddleware = require('../middlewares/question/option/setOptionDependencyMiddleware')
+var loadCreatedStemDataMiddleware = require('../middlewares/question/loadCreatedStemDataMiddleware')
 
 // un-modularized version
 var createFullQuestionMiddleware = require('../middlewares/question/createFullQuestionMiddleware')
@@ -26,6 +27,7 @@ router.post("/solve",solvedQuestionMiddleware)
 router.post("/qstem/create", createQstem)
 router.get("/detail/load", loadProblemDetail)
 router.get("/list/load", loadProblemList)
+router.post("/made/stem", loadCreatedStemDataMiddleware)
 
 
 router.post("/organic/question/create", createFullQuestionMiddleware)

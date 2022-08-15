@@ -31,8 +31,10 @@ mongoose.connect(process.env.DB_URL).then(() => console.log('MongoDB connected..
 
 const authRouter = require("./src/routes/auth");
 const questionRouter = require("./src/routes/question");
+const adminRouter = require("./src/routes/admin")
 app.use("/auth", authRouter);
 app.use("/question", questionRouter);
+app.use("/admin", adminRouter)
 
 app.listen(PORT, () => {
     console.log(`server is listening at localhost:${PORT}`);
