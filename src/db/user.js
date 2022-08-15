@@ -5,13 +5,18 @@ const solvedSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref:"Qstem"
     },
-    ansHistory:{
-        type:[
-            {
-                type : mongoose.Schema.ObjectId,
-                ref : "Option"
+    history:{
+        type:Object,
+        default:{
+            optionSet:[{
+                type: mongoose.Schema.Objectid,
+                ref:"Option"
+            }],
+            initAns:{
+                type: mongoose.Schema.ObjectId,
+                ref:"Option"
             }
-        ]
+        }
     }
 })
 
