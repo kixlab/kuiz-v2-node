@@ -21,6 +21,7 @@ const createFullQuestionMiddleware = (req, res) => {
     const qinfo = req.body.qInfo
     const authorId = qinfo.author
     const cid = req.body.cid
+    const explanation = req.body.explanation
 
     async function saveOptions(options) {
         const savedOptions = await Promise.all(options.map( async (o) => {
@@ -30,6 +31,7 @@ const createFullQuestionMiddleware = (req, res) => {
         }))
 
         qinfo["options"] = savedOptions
+        qinfo["explanation"] = explanation
         
         const newQuestion = await new Qstem(qinfo)
         newQuestion.save((err, data) => {

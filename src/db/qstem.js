@@ -45,7 +45,8 @@ const qstemSchema = new mongoose.Schema({
         }]
     },
     explanation:{
-        type: String
+        type: String,
+        default:""
     }
     },
     {
