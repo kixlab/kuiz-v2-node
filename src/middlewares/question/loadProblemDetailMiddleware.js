@@ -1,9 +1,6 @@
 const Qstem = require('../../db/qstem')
 const Option = require('../../db/option')
-const OptionSet = require('../../db/optionSet')
 const { ObjectId } = require('mongodb');
-
-const { off } = require('../../db/user');
 
 const loadProblemDetailMiddleware = (req,res) => {
     const qid = req.query.qid

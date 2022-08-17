@@ -1,6 +1,7 @@
 const Qstem = require('../../db/qstem')
 const Class = require('../../db/class')
 const User = require('../../db/user')
+const Option = require('../../db/option')
 const { isObjectIdOrHexString } = require('mongoose')
 const ObjectId = require('mongodb').ObjectId
 
@@ -8,6 +9,7 @@ const createQstemMiddleware = (req,res) => {
     var qstemObj = req.body.qstemObj
     var classCode = req.body.cid
     const qstem = new Qstem(qstemObj)
+
 
     const saveToClass = (data) => {
         if(data === null) {

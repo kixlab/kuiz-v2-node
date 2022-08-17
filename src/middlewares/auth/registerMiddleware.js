@@ -2,6 +2,7 @@ const User = require("../../db/user");
 const Class = require("../../db/class")
 
 const registerMiddleware = (req, res) => {
+  console.log("req:",req.body)
   const name = req.body.name;
   const email = req.body.email;
   const imageUrl = req.body.image;
@@ -12,17 +13,26 @@ const registerMiddleware = (req, res) => {
       });
     } else {
       if (user) {
-        Class.findById(user.classes[0], (err, data2) => {
-          if(err) throw errl
-          else {
-            res.json({
-              success:true,
-              new: false,
-              user: user,
-              cType: data2.classType
-            })
-          }
-        })
+        if(user.classes.length!=0){
+          Class.findById(user.classes[0], (err, data2) => {
+            if(err) throw err
+            else {
+              res.json({
+                success:true,
+                new: false,
+                user: user,
+                cType: data2.classType
+              })
+            }
+          })
+        } else {
+          res.json({
+            success:true,
+            new: true,
+            user: user
+          })
+        }
+        
       } else {
         let newUser = new User({ name, email, imageUrl });
         newUser.save((err, data) => {

@@ -1,7 +1,6 @@
 const User = require('../../db/user')
 const Class = require('../../db/class')
 const {ObjectId} = require('mongodb')
-const { createDiffieHellman } = require('crypto')
 
 const loadUserInfoMiddleware = (req,res) => {
     const cid = req.query.cid
