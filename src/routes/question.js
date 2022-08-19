@@ -18,8 +18,12 @@ var loadCreatedOption = require('../middlewares/question/option/loadCreatedOptio
 var createFullQuestionMiddleware = require('../middlewares/question/createFullQuestionMiddleware')
 var solvedQuestionMiddleware = require('../middlewares/question/solveQuestionMiddleware')
 
+
+//cluster
 var getOptionByCluster = require('../middlewares/question/option/getOptionByClusterMiddleware')
 var loadOptionCluster = require('../middlewares/question/option/loadOptionClustserMiddleware')
+var loadClusterDetails = require('../middlewares/question/cluster/loadClusterDetailsMiddleware')
+var loadOptionInCluster = require('../middlewares/question/cluster/loadOptionInClusterMiddleware')
 
 router.get("/option/load", loadOptions)
 router.get("/optiondetail/load",loadOptionDetail)
@@ -36,6 +40,8 @@ router.post("/made/option", loadCreatedOption)
 
 router.get("/load/cluster", loadOptionCluster)
 router.get("/load/optionbycluster",getOptionByCluster)
+router.post("/load/clusters",loadClusterDetails)
+router.post("/load/options", loadOptionInCluster)
 
 
 router.post("/organic/question/create", createFullQuestionMiddleware)
