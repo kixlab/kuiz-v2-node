@@ -71,11 +71,12 @@ const optionSchema = new mongoose.Schema({
         }
     },
     cluster:{
-        type:[{
-            type:mongoose.Schema.ObjectId,
-            ref:"OptionCluster"
-        }],
-        default:[]
+        type:[
+            {
+                type:mongoose.Schema.ObjectId,
+                ref:"OptionCluster"
+            }
+        ]
     }
 
 })

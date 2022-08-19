@@ -6,7 +6,7 @@ const {ObjectId} = require('mongodb')
 
 const makeOptionMiddleware2 = (req, res) => {
     const optionData = req.body.optionData // option object
-    const dependentClusters = optionData.cluster // list of optionCluster
+    const dependentClusters = req.body.dependency // list of optionCluster
 
     const option = new Option(optionData)
 
@@ -20,11 +20,18 @@ const makeOptionMiddleware2 = (req, res) => {
     // 5. update option list for qstem data
     // 6. update made option list for user data
 
+    const removeOrigin = (origin, remove, elem) => {
+        const newArr = origin.filter(!(remove.incluses(o._id)))
+        newArr.concat(elem)
+        return newArr
+    }
+
     option.save(async (err, data) => {
         if(err) throw err;
         else {  
-            let newAnsList = []
-            let newDisList = []
+            let newAnsList = data.is_answer?[data]:[]
+            let newDisList = data.is_answer?[]:[data]
+
             let newAnsRep = null
             let newDisRep = null
             // dependentClusters.forEach((cluster) => {
@@ -33,6 +40,7 @@ const makeOptionMiddleware2 = (req, res) => {
             // })
 
             for (var i = 0; i<dependentClusters.length; i++){
+                console.log("CID:",dependentClusters[i]._id)
                 newAnsList = newAnsList.concat(dependentClusters[i].ansList)
                 newDisList = newDisList.concat(dependentClusters[i].disList)
             }
@@ -48,7 +56,6 @@ const makeOptionMiddleware2 = (req, res) => {
                     newAnsRep = await Option.findOne({_id:ObjectId(newAnsList[0])})
                 }
             }
-
 
             const optionCluster = new OptionCluster({
                 ansList : newAnsList,
@@ -67,10 +74,11 @@ const makeOptionMiddleware2 = (req, res) => {
                         if(err) throw err;
                         // 새로운 clutser의 option 
                         const optionList = newAnsList.concat(newDisList)
-                        Option.updateMany({_id:{$in:optionList}},{cluster:data2._id},(err, data4) => {
+                        Option.updateMany({_id:{$in:optionList}},{$set:{cluster:data2._id}},(err, data4) => {
                             if(err) throw err;
-                            Qstem.findByIdAndUpdate(option.qstem,{$push:{options:data._id}},{$push:{cluster:data2._id}},(err, data5) => {
-                                if(err) throw errl
+
+                            Qstem.findByIdAndUpdate(option.qstem,{$push:{options:data._id, cluster:[data2._id]}}, (err, data5) => {
+                                if(err) throw err
                                 User.findByIdAndUpdate(option.author,{$push:{madeOptions:data._id}},(err, data6) => {
                                     if(err) throw err;
                                     else {
