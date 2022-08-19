@@ -55,6 +55,13 @@ const qstemSchema = new mongoose.Schema({
         }],
         default:[]
     },
+    cluster:{
+        type:[{
+            type: mongoose.Schema.ObjectId,
+            ref:"OptionCluster"
+        }],
+        default:[]
+    }
     },
     {
         timestamps: true,
