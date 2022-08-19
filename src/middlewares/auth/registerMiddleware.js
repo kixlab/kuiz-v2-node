@@ -2,7 +2,6 @@ const User = require("../../db/user");
 const Class = require("../../db/class")
 
 const registerMiddleware = (req, res) => {
-  console.log("req:",req.body)
   const name = req.body.name;
   const email = req.body.email;
   const imageUrl = req.body.image;

@@ -11,7 +11,7 @@ const makeOptionSetMiddleware = (req, res) => {
                 error:"err in saving optionSet"
             })
         } else {
-            Option.updateMany({_id:{"$in":optionSet.options}},{$push:{includedSet:optionSet._id}}).catch((err)=> console.log("ERR:",err))
+            Option.updateMany({_id:{$in:optionSet.options}},{$push:{includedSet:optionSet._id}}).catch((err)=> console.log("ERR:",err))
         }
     })
 }
