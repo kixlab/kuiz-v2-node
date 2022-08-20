@@ -5,6 +5,7 @@ var loadOptions = require('../middlewares/question/option/loadOptionsMiddleware'
 var makeOption = require('../middlewares/question/option/makeOptionMiddleware2')
 var makeOptionSet = require('../middlewares/question/option/makeOptionSetMiddleware')
 var makeSuggestion = require('../middlewares/question/option/makeSuggestionMiddleware')
+var getQstemByOption = require('../middlewares/question/getQstemByOptionMiddleware')
 
 var createQstem = require('../middlewares/question/createQstemMiddleware')
 var loadProblemDetail = require('../middlewares/question/loadProblemDetailMiddleware')
@@ -35,12 +36,14 @@ router.post("/option/dependency", setOptionDependencyMiddleware)
 router.post("/solve",solvedQuestionMiddleware)
 router.post("/option/like", likeOption)
 router.post("/option/dislike", dislikeOption)
+router.post("/qstembyoption", getQstemByOption)
 
 router.post("/qstem/create", createQstem)
 router.get("/detail/load", loadProblemDetail)
 router.get("/list/load", loadProblemList)
 router.post("/made/stem", loadCreatedStemDataMiddleware)
 router.post("/made/option", loadCreatedOption)
+
 
 router.get("/load/cluster", loadCluster)
 router.get("/load/optionbycluster",getOptionByCluster)
