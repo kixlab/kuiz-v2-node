@@ -23,7 +23,6 @@ const loadProblemListMiddleware = (req,res) => {
                 .catch((err) => console.log("ERR:",err))
             }
             else {
-                console.log("no qstem yet") 
                 res.json({
                     qstems:{
                         problemList:[],

@@ -40,7 +40,6 @@ const makeOptionMiddleware2 = (req, res) => {
             // })
 
             for (var i = 0; i<dependentClusters.length; i++){
-                console.log("CID:",dependentClusters[i]._id)
                 newAnsList = newAnsList.concat(dependentClusters[i].ansList)
                 newDisList = newDisList.concat(dependentClusters[i].disList)
             }

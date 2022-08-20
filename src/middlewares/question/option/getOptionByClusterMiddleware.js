@@ -3,7 +3,6 @@ const Option = require('../../../db/option')
 const ObjectId = require('mongodb').ObjectId
 
 const getOptionByClusterMiddleware = (req, res) => {
-    console.log("called")
     const clusterId = req.query.ocid
     OptionCluster.findById(ObjectId(clusterId),(err, data) => {
         if(err) throw err;
