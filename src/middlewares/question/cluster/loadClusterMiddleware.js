@@ -3,7 +3,7 @@ const Option = require('../../../db/option')
 const Qstem = require("../../../db/qstem")
 const ObjectId = require('mongodb').ObjectId
 
-const loadOptionClusterMiddleware = (req, res) => {
+const loadClusterMiddleware = (req, res) => {
     const qid = req.query.qid;
 
     OptionCluster.find({qstem:ObjectId(qid)},async (err, data) => {
@@ -19,4 +19,4 @@ const loadOptionClusterMiddleware = (req, res) => {
 
 }
 
-module.exports = loadOptionClusterMiddleware
+module.exports = loadClusterMiddleware
