@@ -8,10 +8,15 @@ const likeOptionMiddleware = (req, res) => {
     const isAns = req.body.isAns
     const uid = req.body.uid
 
-    console.log("BODY:", req.body)
     const addValue = (arr, elem) => {
-        arr = arr.concat([elem])
-        return Array.from(new Set(arr));
+        arr = arr.concat([elem]).map(a => a.toString())
+        return [...new Set(arr)].map(a => ObjectId(a))
+        // arr1 = arr.map( a => a.toString())
+        // console.log("SET1:", new Set(arr1))
+
+        // // return arr.filter((a, index) => arr.indexOf(a) === index)
+        // console.log("SET:",[...new Set(arr)])
+        // return Array.from(new Set(arr));
     }
     Option.findById(ObjectId(oid), (err, data) => {
         if(err) throw err;
