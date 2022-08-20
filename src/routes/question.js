@@ -13,6 +13,8 @@ var loadOptionDetail = require('../middlewares/question/option/loadOptionDetailM
 var setOptionDependencyMiddleware = require('../middlewares/question/option/setOptionDependencyMiddleware')
 var loadCreatedStemDataMiddleware = require('../middlewares/question/loadCreatedStemDataMiddleware')
 var loadCreatedOption = require('../middlewares/question/option/loadCreatedOptionMiddleware')
+var likeOption = require('../middlewares/question/option/likeOptionMiddleware')
+var dislikeOption = require('../middlewares/question/option/dislikeOptionMiddleware')
 
 // un-modularized version
 var createFullQuestionMiddleware = require('../middlewares/question/createFullQuestionMiddleware')
@@ -21,7 +23,7 @@ var solvedQuestionMiddleware = require('../middlewares/question/solveQuestionMid
 
 //cluster
 var getOptionByCluster = require('../middlewares/question/option/getOptionByClusterMiddleware')
-var loadOptionCluster = require('../middlewares/question/option/loadOptionClustserMiddleware')
+var loadCluster = require('../middlewares/question/cluster/loadClusterMiddleware')
 var loadClusterDetails = require('../middlewares/question/cluster/loadClusterDetailsMiddleware')
 var loadOptionInCluster = require('../middlewares/question/cluster/loadOptionInClusterMiddleware')
 
@@ -31,6 +33,8 @@ router.post("/option/create", makeOption)
 router.post("/optionset/create", makeOptionSet)
 router.post("/option/dependency", setOptionDependencyMiddleware)
 router.post("/solve",solvedQuestionMiddleware)
+router.post("/option/like", likeOption)
+router.post("/option/dislike", dislikeOption)
 
 router.post("/qstem/create", createQstem)
 router.get("/detail/load", loadProblemDetail)
@@ -38,7 +42,7 @@ router.get("/list/load", loadProblemList)
 router.post("/made/stem", loadCreatedStemDataMiddleware)
 router.post("/made/option", loadCreatedOption)
 
-router.get("/load/cluster", loadOptionCluster)
+router.get("/load/cluster", loadCluster)
 router.get("/load/optionbycluster",getOptionByCluster)
 router.post("/load/clusters",loadClusterDetails)
 router.post("/load/options", loadOptionInCluster)
