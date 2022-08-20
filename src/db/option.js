@@ -77,6 +77,13 @@ const optionSchema = new mongoose.Schema({
                 ref:"OptionCluster"
             }
         ]
+    },
+    liked:{
+        type:[{
+            type: mongoose.Schema.ObjectId,
+            ref:"User"
+        }],
+        default:[]
     }
 
 })
