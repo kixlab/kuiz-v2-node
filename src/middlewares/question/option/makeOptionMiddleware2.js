@@ -69,7 +69,8 @@ const makeOptionMiddleware2 = (req, res) => {
             optionCluster.save((err, data2) => {
                 if(err) throw err;
                 else {
-                    OptionCluster.deleteMany({_id:{$in:dependentClusters.map(c => c._id)}},(err, data3) => {
+                    const toDelete = dependentClusters.map(c => c._id)
+                    OptionCluster.deleteMany({_id:{$in:toDelete}},(err, data3) => {
                         if(err) throw err;
                         // 새로운 clutser의 option 
                         const optionList = newAnsList.concat(newDisList)
@@ -77,17 +78,23 @@ const makeOptionMiddleware2 = (req, res) => {
                             if(err) throw err;
 
                             Qstem.findByIdAndUpdate(option.qstem,{$push:{options:data._id, cluster:[data2._id]}}, (err, data5) => {
-                                if(err) throw err
-                                User.findByIdAndUpdate(option.author,{$push:{madeOptions:data._id}},(err, data6) => {
-                                    if(err) throw err;
+                                const newClusList = data5.cluster.concat([data2._id]).filter(clus => !toDelete.includes(clus.toString()))
+                                Qstem.findByIdAndUpdate(option.qstem, {$set:{cluster: newClusList}}, (err, data6) => {
+                                    if(err) throw err
                                     else {
-                                        res.json({
-                                            success:true,
-                                            msg:"Saved Option!",
-                                            option:data
+                                        User.findByIdAndUpdate(option.author,{$push:{madeOptions:data._id}},(err, data7) => {
+                                            if(err) throw err;
+                                            else {
+                                                res.json({
+                                                    success:true,
+                                                    msg:"Saved Option!",
+                                                    option:data
+                                                })
+                                            }
                                         })
                                     }
                                 })
+                                
                             })
                         })
                     })
