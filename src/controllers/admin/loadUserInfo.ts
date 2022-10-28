@@ -5,12 +5,12 @@ import { Get } from '../methods'
 
 export const loadUserInfo = Get<LoadUserInfoParams, LoadUserInfoResults>(async ({ cid }) => {
   const userClass = await ClassModel.findById(cid)
-  if (!userClass) {
-    throw new Error('Class not found')
+  if (userClass) {
+    const students = await UserModel.find({ _id: { $in: userClass.students } })
+    return {
+      students,
+      success: true,
+    }
   }
-  const students = await UserModel.find({ _id: { $in: userClass.students } })
-  return {
-    students,
-    success: true,
-  }
+  throw new Error('Class not found')
 })

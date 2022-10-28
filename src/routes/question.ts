@@ -1,23 +1,27 @@
 import express from 'express'
+import { loadCreatedStemData } from '../controllers/question/loadCreatedStemData'
+import { loadProblemDetail } from '../controllers/question/loadProblemDetail'
+import { loadProblemList } from '../controllers/question/loadProblemList'
+import { solveQuestion } from '../controllers/question/solveQuestion'
+
 import loadOptions from '../middlewares/question/option/loadOptionsMiddleware'
 import makeOption from '../middlewares/question/option/makeOptionMiddleware2'
 import makeOptionSet from '../middlewares/question/option/makeOptionSetMiddleware'
-import getQstemByOption from '../middlewares/question/getQstemByOptionMiddleware'
-import createQstem from '../middlewares/question/createQstemMiddleware'
-import loadProblemDetail from '../middlewares/question/loadProblemDetailMiddleware'
-import loadProblemList from '../middlewares/question/loadProblemListMiddleware'
+
+import dislikeOption from '../middlewares/question/option/dislikeOptionMiddleware'
+import likeOption from '../middlewares/question/option/likeOptionMiddleware'
+import loadCreatedOption from '../middlewares/question/option/loadCreatedOptionMiddleware'
 import loadOptionDetail from '../middlewares/question/option/loadOptionDetailMiddleware'
 import setOptionDependencyMiddleware from '../middlewares/question/option/setOptionDependencyMiddleware'
-import loadCreatedStemDataMiddleware from '../middlewares/question/loadCreatedStemDataMiddleware'
-import loadCreatedOption from '../middlewares/question/option/loadCreatedOptionMiddleware'
-import likeOption from '../middlewares/question/option/likeOptionMiddleware'
-import dislikeOption from '../middlewares/question/option/dislikeOptionMiddleware'
-import createFullQuestionMiddleware from '../middlewares/question/createFullQuestionMiddleware'
-import solvedQuestionMiddleware from '../middlewares/question/solveQuestionMiddleware'
-import getOptionByCluster from '../middlewares/question/option/getOptionByClusterMiddleware'
-import loadCluster from '../middlewares/question/cluster/loadClusterMiddleware'
+
+// cluster
+import { createFullQuestion } from '../controllers/question/createFullQuestion'
+import { getQstemByOption } from '../controllers/question/getQstemByOption'
 import loadClusterDetails from '../middlewares/question/cluster/loadClusterDetailsMiddleware'
+import loadCluster from '../middlewares/question/cluster/loadClusterMiddleware'
 import loadOptionInCluster from '../middlewares/question/cluster/loadOptionInClusterMiddleware'
+import getOptionByCluster from '../middlewares/question/option/getOptionByClusterMiddleware'
+import { createQStem } from '../controllers/question/createQStem'
 
 const router = express.Router()
 
@@ -26,15 +30,15 @@ router.get('/optiondetail/load', loadOptionDetail)
 router.post('/option/create', makeOption)
 router.post('/optionset/create', makeOptionSet)
 router.post('/option/dependency', setOptionDependencyMiddleware)
-router.post('/solve', solvedQuestionMiddleware)
+router.post('/solve', solveQuestion)
 router.post('/option/like', likeOption)
 router.post('/option/dislike', dislikeOption)
 router.post('/qstembyoption', getQstemByOption)
 
-router.post('/qstem/create', createQstem)
+router.post('/qstem/create', createQStem)
 router.get('/detail/load', loadProblemDetail)
 router.get('/list/load', loadProblemList)
-router.post('/made/stem', loadCreatedStemDataMiddleware)
+router.post('/made/stem', loadCreatedStemData)
 router.post('/made/option', loadCreatedOption)
 
 router.get('/load/cluster', loadCluster)
@@ -42,6 +46,6 @@ router.get('/load/optionbycluster', getOptionByCluster)
 router.post('/load/clusters', loadClusterDetails)
 router.post('/load/options', loadOptionInCluster)
 
-router.post('/organic/question/create', createFullQuestionMiddleware)
+router.post('/organic/question/create', createFullQuestion)
 
 export default router

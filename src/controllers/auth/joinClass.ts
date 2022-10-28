@@ -18,8 +18,6 @@ export const joinClass = Post<JoinClassParams, JoinClassResults>(async ({ code, 
       cType: classToJoin.classType,
     }
   }
-  return {
-    msg: 'No such class',
-    success: false,
-  }
+
+  throw new Error('Class not found')
 })

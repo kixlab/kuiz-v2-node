@@ -26,7 +26,7 @@ export interface Option {
   liked: Types.ObjectId[]
 }
 
-const optionSchema = new Schema({
+const optionSchema = new Schema<Option>({
   author: {
     type: Schema.Types.ObjectId,
     ref: 'User',
@@ -128,4 +128,4 @@ const optionSchema = new Schema({
   },
 })
 
-export default model('Option', optionSchema)
+export const OptionModel = model('Option', optionSchema)

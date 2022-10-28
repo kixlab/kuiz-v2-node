@@ -17,8 +17,5 @@ export const checkClassType = Get<CheckClassTypeParams, CheckClassTypeResults>(a
       valid: false,
     }
   }
-  return {
-    cType: false,
-    valid: false,
-  }
+  throw new Error('Invalid class ID')
 })
