@@ -18,15 +18,15 @@ export const createFullQuestion = Post<createFullQuestionParams, createFullQuest
     */
 
     const savedOptions = await Promise.all(
-      optionList.map(async option => {
-        const newOption = new OptionModel(option)
+      optionList.map(async ({ option_text, is_answer }) => {
+        const newOption = new OptionModel({ option_text, author: qinfo.authorId, is_answer })
         const data = await newOption.save()
         return data.id
       })
     )
 
     const newQuestion = new QStemModel({
-      authorId: qinfo.authorId,
+      author: qinfo.authorId,
       options: savedOptions,
       explanation,
     })

@@ -1,6 +1,6 @@
 import { model, Schema, Types } from 'mongoose'
 
-interface OptionCluster {
+export interface OptionCluster {
   ansList: Types.ObjectId[]
   disList: Types.ObjectId[]
   ansExist: boolean

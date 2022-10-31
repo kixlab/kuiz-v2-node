@@ -1,7 +1,10 @@
 import { QStem } from '../../db/qstem'
 
 export interface createFullQuestionParams {
-  optionList: string[]
+  optionList: {
+    option_text: string
+    is_answer: boolean
+  }[]
   qinfo: {
     authorId: string
   }
