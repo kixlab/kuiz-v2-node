@@ -1,2 +1,5 @@
 /node_modules
 /vars
+/build
+
+.DS_Store
