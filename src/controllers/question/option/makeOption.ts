@@ -47,10 +47,10 @@ export const makeOption = Post<MakeOptionParams, MakeOptionResults>(async ({ opt
     ansList: newAnsList,
     disList: newDisList,
     qstem: option.qstem,
-    ansExist: newAnsList.length !== 0,
-    disExist: newDisList.length !== 0,
-    ansRep: newAnsRep,
-    disRep: newDisRep,
+    ansExist: 0 < newAnsList.length,
+    disExist: 0 < newDisList.length,
+    ansRep: newAnsRep?.id,
+    disRep: newDisRep?.id,
   })
 
   await optionCluster.save()

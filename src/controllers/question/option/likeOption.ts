@@ -22,7 +22,7 @@ export const likeOption = Post<LikeOptionParams, LikeOptionResults>(async ({ oid
         const maxOpt = options[likes.indexOf(Math.max(...likes))]
         const newRep = await OptionClusterModel.findByIdAndUpdate(
           new Types.ObjectId(ocid),
-          { $set: { ansRep: maxOpt } },
+          { $set: { ansRep: maxOpt._id } },
           { new: true }
         )
         if (newRep) {
