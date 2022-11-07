@@ -39,7 +39,7 @@ export const makeOption = Post<MakeOptionParams, MakeOptionResults>(async ({ opt
   } else {
     newDisRep = option
     if (newAnsList.length !== 0) {
-      newAnsRep = await OptionModel.findOne({ _id: new Types.ObjectId(newAnsList[0].id) })
+      newAnsRep = await OptionModel.findById(new Types.ObjectId(newAnsList[0].id))
     }
   }
 
