@@ -29,7 +29,7 @@ mongoose
 app.use('/auth', authRouter)
 app.use('/question', questionRouter)
 app.use('/admin', adminRouter)
-app.use('/', statusCheck)
+app.get('/', statusCheck)
 
 app.listen(Env.PORT, () => {
   console.log(`server is listening at localhost:${Env.PORT}`)

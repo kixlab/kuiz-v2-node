@@ -5,9 +5,9 @@ import { Post } from '../methods'
 import { UserModel } from '../../db/user'
 
 export const checkIsInClass = Post<CheckIsInClassParams, CheckIsInClassResults>(async ({ uid, cid }) => {
-  const user = await UserModel.findById(uid)
+  const user = await UserModel.findById(new Types.ObjectId(uid))
   if (user) {
-    const isInClass = user.classes.includes(new Types.ObjectId(cid))
+    const isInClass = ObjectId.isValid(cid) && user.classes.includes(new Types.ObjectId(cid))
     return {
       inclass: isInClass,
       cid: isInClass ? cid : user.classes[0]?.toString(),
