@@ -24,6 +24,7 @@ export interface Option {
   }
   cluster: Types.ObjectId[]
   liked: Types.ObjectId[]
+  keyWords: string[]
 }
 
 const optionSchema = new Schema<Option>({
@@ -124,6 +125,10 @@ const optionSchema = new Schema<Option>({
         ref: 'User',
       },
     ],
+    default: [],
+  },
+  keyWords: {
+    type: [String],
     default: [],
   },
 })

@@ -18,6 +18,8 @@ import { loadCreatedOption } from '../controllers/question/option/loadCreatedOpt
 import { setOptionDependency } from '../controllers/question/option/setOptionDependency'
 import { makeOptionSet } from '../controllers/question/option/makeOptionSet'
 import { dislikeOption } from '../controllers/question/option/dislikeOption'
+import { addKeyWords } from '../controllers/question/addKeyWords'
+import { updateExplantion } from '../controllers/question/updateExplanation'
 
 const router = express.Router()
 
@@ -41,6 +43,8 @@ router.get('/load/cluster', loadCluster)
 router.get('/load/optionbycluster', getOptionByCluster)
 router.post('/load/clusters', loadClusterDetails)
 router.post('/load/options', loadOptionInCluster)
+router.post('/addKeyWords', addKeyWords)
+router.post('/updateExplanation', updateExplantion)
 
 router.post('/organic/question/create', createFullQuestion)
 
