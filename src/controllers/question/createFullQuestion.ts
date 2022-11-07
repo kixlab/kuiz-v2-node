@@ -1,12 +1,12 @@
 import { Types } from 'mongoose'
-import { createFullQuestionParams, createFullQuestionResults } from '../../api/question/createFullQuestion'
+import { CreateFullQuestionParams, CreateFullQuestionResults } from '../../api/question/createFullQuestion'
 import { ClassModel } from '../../db/class'
 import { OptionModel } from '../../db/option'
 import { QStemModel } from '../../db/qstem'
 import { UserModel } from '../../db/user'
 import { Post } from '../methods'
 
-export const createFullQuestion = Post<createFullQuestionParams, createFullQuestionResults>(
+export const createFullQuestion = Post<CreateFullQuestionParams, CreateFullQuestionResults>(
   async ({ optionList, qinfo, cid, explanation }) => {
     /*
     logic

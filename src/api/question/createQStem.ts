@@ -1,4 +1,4 @@
-export interface createQStemParams {
+export interface CreateQStemParams {
   qstemObj: {
     author: string
     stem_text: string
@@ -13,6 +13,6 @@ export interface createQStemParams {
   cid: string
 }
 
-export interface createQStemResults {
+export interface CreateQStemResults {
   data: string
 }

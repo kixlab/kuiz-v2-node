@@ -1,6 +1,6 @@
 import { QStem } from '../../db/qstem'
 
-export interface createFullQuestionParams {
+export interface CreateFullQuestionParams {
   optionList: {
     option_text: string
     is_answer: boolean
@@ -12,6 +12,6 @@ export interface createFullQuestionParams {
   explanation: string
 }
 
-export interface createFullQuestionResults {
+export interface CreateFullQuestionResults {
   question: QStem
 }

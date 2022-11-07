@@ -1,11 +1,11 @@
 import { Types } from 'mongoose'
-import { createQStemParams, createQStemResults } from '../../api/question/createQStem'
+import { CreateQStemParams, CreateQStemResults } from '../../api/question/createQStem'
 import { ClassModel } from '../../db/class'
 import { QStemModel } from '../../db/qstem'
 import { UserModel } from '../../db/user'
 import { Post } from '../methods'
 
-export const createQStem = Post<createQStemParams, createQStemResults>(async ({ qstemObj, cid }) => {
+export const createQStem = Post<CreateQStemParams, CreateQStemResults>(async ({ qstemObj, cid }) => {
   const qstem = new QStemModel(qstemObj)
 
   await qstem.save()
