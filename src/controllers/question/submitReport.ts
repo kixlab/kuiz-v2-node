@@ -3,9 +3,9 @@ import { SubmitReportParams, SubmitReportResults } from '../../api/question/subm
 import { ReportModel } from '../../db/report'
 import { Post } from '../methods'
 
-export const submitReport = Post<SubmitReportParams, SubmitReportResults>(async ({ sid, comment }) => {
+export const submitReport = Post<SubmitReportParams, SubmitReportResults>(async ({ uid, comment }) => {
   const report = ReportModel.createDoc({
-    sid: new Types.ObjectId(sid),
+    uid: new Types.ObjectId(uid),
     comment,
   })
   await report.save()

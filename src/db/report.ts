@@ -1,7 +1,7 @@
 import { Schema, model, Types, Model, Document } from 'mongoose'
 
 export interface Report {
-  sid: Types.ObjectId
+  uid: Types.ObjectId
   comment: string
 }
 
@@ -10,7 +10,7 @@ interface ReportClass extends Model<Report> {
 }
 
 const ReportSchema = new Schema<Report, ReportClass>({
-  sid: {
+  uid: {
     type: Schema.Types.ObjectId,
   },
   comment: {

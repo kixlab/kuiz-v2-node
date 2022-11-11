@@ -1,5 +1,5 @@
 export interface SubmitReportParams {
-  sid: string
+  uid: string
   comment: string
 }
 
