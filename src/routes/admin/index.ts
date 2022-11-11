@@ -1,5 +1,5 @@
 import express from 'express'
-import { loadUserInfo } from '../controllers/admin/loadUserInfo'
+import { loadUserInfo } from '../../controllers/admin/loadUserInfo'
 
 const router = express.Router()
 

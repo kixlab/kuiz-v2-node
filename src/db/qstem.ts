@@ -14,6 +14,7 @@ export interface QStem {
   explanation: string
   contributor: Types.ObjectId[]
   cluster: Types.ObjectId[]
+  report: Types.ObjectId[]
 }
 
 const QstemSchema = new Schema<QStem>(
@@ -86,6 +87,14 @@ const QstemSchema = new Schema<QStem>(
         },
       ],
       default: [],
+    },
+    report: {
+      type: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'Report',
+        },
+      ],
     },
   },
   {

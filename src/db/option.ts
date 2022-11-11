@@ -4,7 +4,6 @@ export interface Option {
   author: Types.ObjectId
   option_text: string
   explanation: string
-  likes: number
   is_answer: boolean
   class: Types.ObjectId
   qstem: Types.ObjectId
@@ -24,6 +23,7 @@ export interface Option {
   }
   cluster: Types.ObjectId[]
   liked: Types.ObjectId[]
+  disliked: Types.ObjectId[]
   keyWords: string[]
 }
 
@@ -40,10 +40,6 @@ const optionSchema = new Schema<Option>({
   explanation: {
     type: String,
     trim: true,
-  },
-  likes: {
-    type: Number,
-    default: 0,
   },
   is_answer: {
     type: Boolean,
@@ -119,6 +115,15 @@ const optionSchema = new Schema<Option>({
     ],
   },
   liked: {
+    type: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
+    default: [],
+  },
+  disliked: {
     type: [
       {
         type: Schema.Types.ObjectId,

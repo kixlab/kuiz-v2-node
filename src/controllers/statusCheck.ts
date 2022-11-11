@@ -1,7 +1,7 @@
 import { format } from 'date-fns'
+import { utcToZonedTime } from 'date-fns-tz'
 import { StatusCheckParams, StatusCheckResults } from '../api/statusCheck'
 import { Get } from './methods'
-import { utcToZonedTime } from 'date-fns-tz'
 
 const startTime = utcToZonedTime(Date.now(), 'Asia/Seoul')
 
