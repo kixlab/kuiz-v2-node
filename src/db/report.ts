@@ -6,7 +6,7 @@ export interface Report {
   comment: string
 }
 
-interface ReportClass extends KuizModel<Report> {}
+interface ReportClass extends KuizModel<Report, 'uid' | 'comment'> {}
 
 const ReportSchema = new Schema<Report, ReportClass>({
   uid: {
