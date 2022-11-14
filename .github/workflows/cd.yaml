@@ -30,4 +30,4 @@ jobs:
           script: |
             cd kuiz-v2-node
             git pull
-            whoami
+            yarn pm2:restart
