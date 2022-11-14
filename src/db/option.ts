@@ -1,4 +1,5 @@
 import { model, Schema, Types } from 'mongoose'
+import { KuizModel } from '../types/kuizModel'
 
 export interface Option {
   author: Types.ObjectId
@@ -26,6 +27,8 @@ export interface Option {
   disliked: Types.ObjectId[]
   keyWords: string[]
 }
+
+interface OptionClass extends KuizModel<Option, 'author' | 'option_text' | 'is_answer'> {}
 
 const optionSchema = new Schema<Option>({
   author: {
@@ -137,5 +140,8 @@ const optionSchema = new Schema<Option>({
     default: [],
   },
 })
+optionSchema.static('createDoc', (args: Option) => {
+  return new OptionModel(args)
+})
 
-export const OptionModel = model('Option', optionSchema)
+export const OptionModel = model<Option, OptionClass>('Option', optionSchema)

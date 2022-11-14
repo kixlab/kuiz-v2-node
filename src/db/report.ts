@@ -1,13 +1,12 @@
-import { Schema, model, Types, Model, Document } from 'mongoose'
+import { model, Schema, Types } from 'mongoose'
+import { KuizModel } from '../types/kuizModel'
 
 export interface Report {
   uid: Types.ObjectId
   comment: string
 }
 
-interface ReportClass extends Model<Report> {
-  createDoc(args: Report): Document & Report
-}
+interface ReportClass extends KuizModel<Report> {}
 
 const ReportSchema = new Schema<Report, ReportClass>({
   uid: {

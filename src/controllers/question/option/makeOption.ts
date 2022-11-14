@@ -7,7 +7,16 @@ import { UserModel } from '../../../db/user'
 import { Post } from '../../methods'
 
 export const makeOption = Post<MakeOptionParams, MakeOptionResults>(async ({ optionData, dependency }) => {
-  const option = new OptionModel(optionData)
+  const option = OptionModel.createDoc({
+    author: new Types.ObjectId(optionData.author),
+    class: new Types.ObjectId(optionData.class),
+    option_text: optionData.option_text,
+    is_answer: optionData.is_answer,
+    explanation: optionData.explanation,
+    qstem: new Types.ObjectId(optionData.qstem),
+    plausible: optionData.plausible,
+    cluster: optionData.cluster,
+  })
 
   // 1. save new option to option collection
   // 2. make new OptionCluster
@@ -43,9 +52,9 @@ export const makeOption = Post<MakeOptionParams, MakeOptionResults>(async ({ opt
     }
   }
 
-  const optionCluster = new OptionClusterModel({
-    ansList: newAnsList,
-    disList: newDisList,
+  const optionCluster = OptionClusterModel.createDoc({
+    ansList: newAnsList.map(l => l.id),
+    disList: newDisList.map(l => l.id),
     qstem: option.qstem,
     ansExist: 0 < newAnsList.length,
     disExist: 0 < newDisList.length,
