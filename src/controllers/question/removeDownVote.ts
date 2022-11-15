@@ -11,11 +11,7 @@ export const removeDownVote = Post<RemoveDownVoteParams, RemoveDownVoteResults>(
   if (option) {
     for await (const ocid of option.cluster) {
       removeUser(option.disliked, new Types.ObjectId(uid))
-      await OptionModel.findByIdAndUpdate(
-        new Types.ObjectId(oid),
-        { $set: { disliked: option.disliked } },
-        { new: true }
-      )
+      await OptionModel.findByIdAndUpdate(new Types.ObjectId(oid), { $set: { disliked: option.disliked } })
 
       await optionClusterService.updateRep(option.is_answer, ocid)
     }

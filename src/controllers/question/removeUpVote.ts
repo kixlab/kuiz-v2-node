@@ -10,7 +10,7 @@ export const removeUpVote = Post<RemoveUpVoteParams, RemoveUpVoteResults>(async 
   if (option) {
     for await (const ocid of option.cluster) {
       removeUser(option.liked, new Types.ObjectId(uid))
-      await OptionModel.findByIdAndUpdate(new Types.ObjectId(oid), { $set: { liked: option.liked } }, { new: true })
+      await OptionModel.findByIdAndUpdate(new Types.ObjectId(oid), { $set: { liked: option.liked } })
 
       await optionClusterService.updateRep(option.is_answer, ocid)
     }

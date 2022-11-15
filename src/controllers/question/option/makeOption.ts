@@ -3,32 +3,20 @@ import { MakeOptionParams, MakeOptionResults } from '../../../api/question/optio
 import { OptionModel } from '../../../db/option'
 import { OptionClusterModel } from '../../../db/optionCluster'
 import { QStemModel } from '../../../db/qstem'
-import { UserModel } from '../../../db/user'
+import { optionService } from '../../../services/option'
 import { Post } from '../../methods'
 
 export const makeOption = Post<MakeOptionParams, MakeOptionResults>(async ({ optionData, dependency }) => {
-  const option = OptionModel.createDoc({
-    author: new Types.ObjectId(optionData.author),
-    class: new Types.ObjectId(optionData.class),
-    option_text: optionData.option_text,
-    is_answer: optionData.is_answer,
-    explanation: optionData.explanation,
-    qstem: new Types.ObjectId(optionData.qstem),
-    plausible: optionData.plausible,
-    cluster: optionData.cluster,
-  })
+  const option = await optionService.create(
+    new Types.ObjectId(optionData.author),
+    new Types.ObjectId(optionData.qstem),
+    new Types.ObjectId(optionData.class),
+    optionData.option_text,
+    optionData.is_answer,
+    optionData.explanation,
+    optionData.keywords
+  )
 
-  // 1. save new option to option collection
-  // 2. make new OptionCluster
-  // 3. if required, delete previous OptionCluster
-  // 4. update OptionCluster id of relevant dataset
-  // 4.1 option
-  // update previous optionCluster
-  // 4.2 qstem
-  // 5. update option list for qstem data
-  // 6. update made option list for user data
-
-  await option.save()
   const newAnsList = option.is_answer ? [option] : []
   const newDisList = option.is_answer ? [] : [option]
 
@@ -70,14 +58,11 @@ export const makeOption = Post<MakeOptionParams, MakeOptionResults>(async ({ opt
   const optionList = [...newAnsList, ...newDisList]
   await OptionModel.updateMany({ _id: { $in: optionList } }, { $set: { cluster: optionCluster.id } })
 
-  const qStem = await QStemModel.findByIdAndUpdate(option.qstem, {
-    $push: { options: option.id, cluster: [optionCluster.id] },
-  })
+  const qStem = await QStemModel.findById(option.qstem)
 
   if (qStem) {
     const newClusList = qStem.cluster.concat([optionCluster._id]).filter(clus => !toDelete.includes(clus.toString()))
     await QStemModel.findByIdAndUpdate(option.qstem, { $set: { cluster: newClusList } })
-    await UserModel.findByIdAndUpdate(option.author, { $push: { madeOptions: option } })
     return {
       option,
     }
