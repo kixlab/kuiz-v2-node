@@ -8,10 +8,7 @@ export interface MakeOptionParams {
     explanation: string
     class: string
     qstem: string
-    plausible: {
-      similar: string[]
-      difference: string[]
-    }
+    keywords: string[]
     cluster: any[]
   }
   dependency: any[]

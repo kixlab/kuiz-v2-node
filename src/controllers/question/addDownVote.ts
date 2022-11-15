@@ -10,11 +10,7 @@ export const addDownVote = Post<AddDownVoteParams, AddDownVoteResults>(async ({ 
   if (option) {
     for await (const ocid of option.cluster) {
       addUser(option.disliked, new Types.ObjectId(uid))
-      await OptionModel.findByIdAndUpdate(
-        new Types.ObjectId(oid),
-        { $set: { disliked: option.disliked } },
-        { new: true }
-      )
+      await OptionModel.findByIdAndUpdate(new Types.ObjectId(oid), { $set: { disliked: option.disliked } })
 
       optionClusterService.updateRep(option.is_answer, ocid)
     }
