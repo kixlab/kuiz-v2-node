@@ -1,8 +1,9 @@
 import { Option } from '../../db/option'
 import { QStem } from '../../db/qstem'
+import { ID } from '../../types/common'
 
 export interface LoadProblemDetailParams {
-  qid: string
+  qid: ID
 }
 
 export interface LoadProblemDetailResults {

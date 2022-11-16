@@ -3,16 +3,18 @@ import { Option, OptionModel } from '../db/option'
 import { QStemModel } from '../db/qstem'
 import { UserModel } from '../db/user'
 
+interface OptionData {
+  uid: Types.ObjectId
+  qid: Types.ObjectId
+  cid: Types.ObjectId
+  optionText: string
+  isAnswer: boolean
+  explanation?: string
+  keywords?: string[]
+}
+
 class OptionService {
-  async create(
-    uid: Types.ObjectId,
-    qid: Types.ObjectId,
-    cid: Types.ObjectId,
-    optionText: string,
-    isAnswer: boolean,
-    explanation = '',
-    keywords: string[] = []
-  ) {
+  async create({ uid, qid, cid, optionText, isAnswer, explanation = '', keywords = [] }: OptionData) {
     const option = new OptionModel({
       author: uid,
       class: cid,

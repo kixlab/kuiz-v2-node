@@ -1,6 +1,8 @@
+import { ID } from '../../types/common'
+
 export interface AddKeyWordsParams {
-  qid: string
-  oid: string
+  qid: ID
+  oid: ID
   keyWords: string[]
 }
 

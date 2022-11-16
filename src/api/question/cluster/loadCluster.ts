@@ -1,7 +1,8 @@
 import { Option } from '../../../db/option'
+import { ID } from '../../../types/common'
 
 export interface LoadClusterParams {
-  qid: string
+  qid: ID
 }
 
 export interface LoadClusterResults {

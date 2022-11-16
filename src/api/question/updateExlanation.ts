@@ -1,5 +1,7 @@
+import { ID } from '../../types/common'
+
 export interface UpdateExplanationParams {
-  qid: string
+  qid: ID
   explanation: string
 }
 

@@ -1,5 +1,7 @@
+import { ID } from '../../../types/common'
+
 export interface SetOptionDependencyParams {
-  oid: string
+  oid: ID
   dependency: any[]
 }
 

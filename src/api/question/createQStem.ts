@@ -1,16 +1,18 @@
+import { ID } from '../../types/common'
+
 export interface CreateQStemParams {
   qstemObj: {
-    author: string
+    uid: ID
     stem_text: string
     raw_string: string
     action_verb: string[]
     keyword: string[]
-    class: string
-    options: string[]
-    optionSets: string[]
+    cid: ID
+    options: ID[]
+    optionSets: ID[]
     learning_objective: string
   }
-  cid: string
+  cid: ID
 }
 
 export interface CreateQStemResults {

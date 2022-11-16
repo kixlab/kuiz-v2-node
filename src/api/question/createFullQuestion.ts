@@ -1,4 +1,5 @@
 import { QStem } from '../../db/qstem'
+import { ID } from '../../types/common'
 
 export interface CreateFullQuestionParams {
   optionList: {
@@ -6,9 +7,9 @@ export interface CreateFullQuestionParams {
     is_answer: boolean
   }[]
   qinfo: {
-    authorId: string
+    authorId: ID
   }
-  cid: string
+  cid: ID
   explanation: string
 }
 

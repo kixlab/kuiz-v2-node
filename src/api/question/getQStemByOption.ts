@@ -1,7 +1,8 @@
 import { QStem } from '../../db/qstem'
+import { ID } from '../../types/common'
 
 export interface GetQstemByOptionParams {
-  qstems: string[]
+  qstems: ID[]
 }
 
 export interface GetQstemByOptionResults {

@@ -1,5 +1,7 @@
+import { ID } from '../../types/common'
+
 export interface SubmitReportParams {
-  uid: string
+  uid: ID
   comment: string
 }
 
