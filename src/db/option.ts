@@ -22,7 +22,7 @@ export interface Option {
     same: any[]
     contradictory: any[]
   }
-  cluster: Types.ObjectId[]
+  cluster: Types.ObjectId
   liked: Types.ObjectId[]
   disliked: Types.ObjectId[]
   keyWords: string[]
@@ -109,14 +109,7 @@ const optionSchema = new Schema<Option>({
       contradictory: [],
     },
   },
-  cluster: {
-    type: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'OptionCluster',
-      },
-    ],
-  },
+  cluster: { type: Schema.Types.ObjectId },
   liked: {
     type: [
       {

@@ -1,9 +1,9 @@
-import { OptionCluster } from '../../../db/optionCluster'
+import { Option } from '../../../db/option'
 
 export interface LoadClusterParams {
   qid: string
 }
 
 export interface LoadClusterResults {
-  cluster: OptionCluster[]
+  cluster: [Option, Option[]][]
 }
