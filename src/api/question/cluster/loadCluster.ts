@@ -6,5 +6,5 @@ export interface LoadClusterParams {
 }
 
 export interface LoadClusterResults {
-  cluster: [Option, Option[]][]
+  cluster: { representative: Option; options: Option[] }[]
 }

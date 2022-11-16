@@ -106,7 +106,7 @@ const optionSchema = new Schema<Option>({
       contradictory: [],
     },
   },
-  disjointSet: { type: Schema.Types.ObjectId },
+  disjointSet: { type: Schema.Types.ObjectId, ref: 'Option' },
   liked: {
     type: [
       {

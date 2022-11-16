@@ -7,6 +7,12 @@ export const loadCluster = Get<LoadClusterParams, LoadClusterResults>(async ({ q
   const cluster = await optionService.getDisjointSets(new Types.ObjectId(qid))
 
   return {
-    cluster,
+    cluster: cluster.map(c => {
+      const [representative, options] = c
+      return {
+        representative,
+        options,
+      }
+    }),
   }
 })

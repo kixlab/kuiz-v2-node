@@ -44,7 +44,7 @@ class OptionService {
     for (const option of options) {
       const cluster = await this.findOption(option.id)
       if (!disjointSets.has(cluster.id)) {
-        disjointSets.set(cluster.id, [cluster, [cluster]])
+        disjointSets.set(cluster.id, [cluster, []])
       }
       const [representative, members] = disjointSets.get(cluster.id)!
       const repScore = representative.liked.length - representative.disliked.length
@@ -62,7 +62,7 @@ class OptionService {
     const option = await OptionModel.findById(oid)
 
     if (option) {
-      if (option.disjointSet === option.id) {
+      if (option.disjointSet.equals(option._id)) {
         return option
       } else {
         const cluster = await this.findOption(option.disjointSet)
@@ -71,7 +71,7 @@ class OptionService {
         return cluster
       }
     } else {
-      throw new Error('Option not found')
+      throw new Error(`Option not found: ${oid}`)
     }
   }
 
@@ -90,7 +90,7 @@ class OptionService {
     const option = await OptionModel.findById(oid)
 
     if (option) {
-      const i = option[type].findIndex(u => u.id === uid.id)
+      const i = option[type].findIndex(u => u.equals(uid._id))
       if (i < 0) {
         option[type].push(uid)
         await OptionModel.findByIdAndUpdate(new Types.ObjectId(oid), { $set: { [type]: option[type] } })
@@ -104,7 +104,7 @@ class OptionService {
     const option = await OptionModel.findById(oid)
 
     if (option) {
-      const i = option[type].findIndex(u => u.id === uid.id)
+      const i = option[type].findIndex(u => u.equals(uid._id))
       if (0 <= i) {
         option[type].splice(i, 1)
         await OptionModel.findByIdAndUpdate(new Types.ObjectId(oid), { $set: { [type]: option[type] } })
