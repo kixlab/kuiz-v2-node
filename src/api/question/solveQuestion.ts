@@ -1,8 +1,10 @@
+import { ID } from '../../types/common'
+
 export interface SolveQuestionParams {
-  uid: string
+  uid: ID
   initAns: string
-  qid: string
-  optionSet: string[]
+  qid: ID
+  optionSet: ID[]
   isCorrect: boolean
 }
 

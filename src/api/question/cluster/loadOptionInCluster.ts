@@ -1,7 +1,8 @@
 import { Option } from '../../../db/option'
+import { ID } from '../../../types/common'
 
 export interface LoadOptionInClusterParams {
-  optionList: string[]
+  optionList: ID[]
 }
 
 export interface LoadOptionInClusterResults {

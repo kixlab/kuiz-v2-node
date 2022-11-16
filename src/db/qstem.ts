@@ -13,7 +13,6 @@ export interface QStem {
   optionSets: Types.ObjectId[]
   explanation: string
   contributor: Types.ObjectId[]
-  cluster: Types.ObjectId[]
   report: Types.ObjectId[]
 }
 
@@ -75,15 +74,6 @@ const QstemSchema = new Schema<QStem>(
         {
           type: Schema.Types.ObjectId,
           ref: 'User',
-        },
-      ],
-      default: [],
-    },
-    cluster: {
-      type: [
-        {
-          type: Schema.Types.ObjectId,
-          ref: 'OptionCluster',
         },
       ],
       default: [],

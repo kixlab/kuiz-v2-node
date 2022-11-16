@@ -1,7 +1,8 @@
 import { QStem } from '../../db/qstem'
+import { ID } from '../../types/common'
 
 export interface loadCreatedStemDataParams {
-  uid: string
+  uid: ID
 }
 
 export interface loadCreatedStemDataResults {

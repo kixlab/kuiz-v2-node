@@ -1,17 +1,17 @@
 import { Option } from '../../../db/option'
+import { ID } from '../../../types/common'
 
 export interface MakeOptionParams {
   optionData: {
-    author: string
+    author: ID
     option_text: string
     is_answer: boolean
     explanation: string
-    class: string
-    qstem: string
+    class: ID
+    qstem: ID
     keywords: string[]
-    cluster: any[]
   }
-  dependency: any[]
+  similarOptions: ID[]
 }
 
 export interface MakeOptionResults {

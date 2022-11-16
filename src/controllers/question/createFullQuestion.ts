@@ -4,6 +4,8 @@ import { ClassModel } from '../../db/class'
 import { OptionModel } from '../../db/option'
 import { QStemModel } from '../../db/qstem'
 import { UserModel } from '../../db/user'
+import { optionService } from '../../services/option'
+import { qStemService } from '../../services/qStem'
 import { Post } from '../methods'
 
 export const createFullQuestion = Post<CreateFullQuestionParams, CreateFullQuestionResults>(
@@ -17,25 +19,31 @@ export const createFullQuestion = Post<CreateFullQuestionParams, CreateFullQuest
     - class와 user info에 qstem을 push 해준다. 
     */
 
+    const question = await qStemService.create({
+      uid: qinfo.authorId,
+      cid,
+      stem_text: explanation,
+      raw_string: explanation,
+      learning_objective: explanation,
+    })
+
     const savedOptions = await Promise.all(
       optionList.map(async ({ option_text, is_answer }) => {
-        const newOption = new OptionModel({ option_text, author: qinfo.authorId, is_answer })
-        const data = await newOption.save()
-        return data.id
+        const option = await optionService.create({
+          uid: new Types.ObjectId(qinfo.authorId),
+          cid: new Types.ObjectId(cid),
+          qid: question.id,
+          isAnswer: is_answer,
+          optionText: option_text,
+        })
+        return option.id
       })
     )
 
-    const newQuestion = new QStemModel({
-      author: qinfo.authorId,
-      options: savedOptions,
-      explanation,
-    })
-    await newQuestion.save()
-    await ClassModel.findByIdAndUpdate(new Types.ObjectId(cid), { $push: { qstems: newQuestion.id } })
-    await UserModel.findByIdAndUpdate(new Types.ObjectId(qinfo.authorId), { $push: { made: newQuestion.id } })
+    QStemModel.findByIdAndUpdate(question.id, { options: savedOptions })
 
     return {
-      question: newQuestion,
+      question,
     }
   }
 )

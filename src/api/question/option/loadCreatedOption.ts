@@ -1,7 +1,8 @@
 import { Option } from '../../../db/option'
+import { ID } from '../../../types/common'
 
 export interface LoadCreatedOptionParams {
-  uid: string
+  uid: ID
 }
 
 export interface LoadCreatedOptionResults {

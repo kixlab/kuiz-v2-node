@@ -1,6 +1,8 @@
+import { ID } from '../../types/common'
+
 export interface AddDownVoteParams {
-  oid: string
-  uid: string
+  oid: ID
+  uid: ID
 }
 
 export interface AddDownVoteResults {}

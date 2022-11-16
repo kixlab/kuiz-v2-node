@@ -1,28 +1,26 @@
 import express from 'express'
-import { loadCreatedStemData } from '../../controllers/question/loadCreatedStemData'
-import { loadProblemDetail } from '../../controllers/question/loadProblemDetail'
-import { loadProblemList } from '../../controllers/question/loadProblemList'
-import { solveQuestion } from '../../controllers/question/solveQuestion'
-import { createFullQuestion } from '../../controllers/question/createFullQuestion'
-import { getQstemByOption } from '../../controllers/question/getQstemByOption'
-import { createQStem } from '../../controllers/question/createQStem'
-import { loadOptions } from '../../controllers/question/option/loadOptions'
-import { makeOption } from '../../controllers/question/option/makeOption'
-import { getOptionByCluster } from '../../controllers/question/option/getOptionByCluster'
+import { addDownVote } from '../../controllers/question/addDownVote'
+import { addKeyWords } from '../../controllers/question/addKeyWords'
 import { addUpVote } from '../../controllers/question/addUpVote'
 import { loadCluster } from '../../controllers/question/cluster/loadCluster'
 import { loadOptionInCluster } from '../../controllers/question/cluster/loadOptionInCluster'
-import { loadClusterDetails } from '../../controllers/question/cluster/loadClusterDetails'
-import { loadOptionDetail } from '../../controllers/question/option/loadOptionDetail'
+import { createFullQuestion } from '../../controllers/question/createFullQuestion'
+import { createQStem } from '../../controllers/question/createQStem'
+import { getQstemByOption } from '../../controllers/question/getQstemByOption'
+import { loadCreatedStemData } from '../../controllers/question/loadCreatedStemData'
+import { loadProblemDetail } from '../../controllers/question/loadProblemDetail'
+import { loadProblemList } from '../../controllers/question/loadProblemList'
 import { loadCreatedOption } from '../../controllers/question/option/loadCreatedOption'
-import { setOptionDependency } from '../../controllers/question/option/setOptionDependency'
+import { loadOptionDetail } from '../../controllers/question/option/loadOptionDetail'
+import { loadOptions } from '../../controllers/question/option/loadOptions'
+import { makeOption } from '../../controllers/question/option/makeOption'
 import { makeOptionSet } from '../../controllers/question/option/makeOptionSet'
-import { removeUpVote } from '../../controllers/question/removeUpVote'
-import { addKeyWords } from '../../controllers/question/addKeyWords'
-import { updateExplantion } from '../../controllers/question/updateExplanation'
-import { submitReport } from '../../controllers/question/submitReport'
-import { addDownVote } from '../../controllers/question/addDownVote'
+import { setOptionDependency } from '../../controllers/question/option/setOptionDependency'
 import { removeDownVote } from '../../controllers/question/removeDownVote'
+import { removeUpVote } from '../../controllers/question/removeUpVote'
+import { solveQuestion } from '../../controllers/question/solveQuestion'
+import { submitReport } from '../../controllers/question/submitReport'
+import { updateExplantion } from '../../controllers/question/updateExplanation'
 
 const router = express.Router()
 
@@ -37,8 +35,6 @@ router.get('/list/load', loadProblemList)
 router.post('/made/stem', loadCreatedStemData)
 router.post('/made/option', loadCreatedOption)
 router.get('/load/cluster', loadCluster)
-router.get('/load/optionbycluster', getOptionByCluster)
-router.post('/load/clusters', loadClusterDetails)
 router.post('/load/options', loadOptionInCluster)
 router.post('/organic/question/create', createFullQuestion)
 

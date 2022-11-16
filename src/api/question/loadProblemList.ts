@@ -1,7 +1,8 @@
 import { QStem } from '../../db/qstem'
+import { ID } from '../../types/common'
 
 export interface LoadProblemListParams {
-  cid: string
+  cid: ID
 }
 
 export interface LoadProblemListResults {
