@@ -8,21 +8,21 @@ class OptionService {
     uid: Types.ObjectId,
     qid: Types.ObjectId,
     cid: Types.ObjectId,
-    option_text: string,
-    is_answer: boolean,
-    explanation: string,
-    keywords: string[]
+    optionText: string,
+    isAnswer: boolean,
+    explanation = '',
+    keywords: string[] = []
   ) {
-    const option = OptionModel.createDoc({
+    const option = new OptionModel({
       author: uid,
       class: cid,
-      option_text,
-      is_answer,
+      option_text: optionText,
+      is_answer: isAnswer,
       explanation,
       qstem: qid,
       keyWords: keywords,
     })
-    option.cluster = option.id
+    option.disjointSet = option.id
     await option.save()
 
     await UserModel.findByIdAndUpdate(uid, { $push: { madeOptions: option.id } })
@@ -35,36 +35,36 @@ class OptionService {
     return option
   }
 
-  async getClusters(qid: Types.ObjectId): Promise<[Option, Option[]][]> {
+  async getDisjointSets(qid: Types.ObjectId): Promise<[Option, Option[]][]> {
     const options = await OptionModel.find({ qstem: new Types.ObjectId(qid) })
-    const clusters = new Map<Types.ObjectId, [Option, Option[]]>()
+    const disjointSets = new Map<Types.ObjectId, [Option, Option[]]>()
 
     for (const option of options) {
       const cluster = await this.findOption(option.id)
-      if (!clusters.has(cluster.id)) {
-        clusters.set(cluster.id, [cluster, [cluster]])
+      if (!disjointSets.has(cluster.id)) {
+        disjointSets.set(cluster.id, [cluster, [cluster]])
       }
-      const [representative, members] = clusters.get(cluster.id)!
+      const [representative, members] = disjointSets.get(cluster.id)!
       const repScore = representative.liked.length - representative.disliked.length
       const optionScore = option.liked.length - option.disliked.length
       if (repScore < optionScore) {
-        clusters.get(cluster.id)![0] = option
+        disjointSets.get(cluster.id)![0] = option
       }
       members.push(option)
     }
 
-    return [...clusters.values()]
+    return [...disjointSets.values()]
   }
 
   async findOption(oid: Types.ObjectId): Promise<Document<unknown, any, Option> & Option> {
     const option = await OptionModel.findById(oid)
 
     if (option) {
-      if (option.cluster === option.id) {
+      if (option.disjointSet === option.id) {
         return option
       } else {
-        const cluster = await this.findOption(option.cluster)
-        option.cluster = cluster.id
+        const cluster = await this.findOption(option.disjointSet)
+        option.disjointSet = cluster.id
         await option.save()
         return cluster
       }
