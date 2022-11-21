@@ -2,6 +2,7 @@ import { Document, Types } from 'mongoose'
 import { Option, OptionModel } from '../db/option'
 import { QStemModel } from '../db/qstem'
 import { UserModel } from '../db/user'
+import { ID } from '../types/common'
 import { Compute } from '../utils/compute'
 import { languageModelService } from './languageModel'
 
@@ -41,23 +42,19 @@ class OptionService {
     return option
   }
 
-  async getSimilarOptions(oid: Types.ObjectId): Promise<Option[]> {
-    const option = await OptionModel.findById(oid)
-    if (option) {
-      const options =
-        (await QStemModel.findById(option.qstem)?.populate<{ options: Option[] }>('options'))?.options ?? []
-
-      const similarOptions = options
+  async getSimilarOptions(qid: ID, optionText: string): Promise<Option[]> {
+    const embedding = await languageModelService.createEmbedding(optionText)
+    const qStem = await QStemModel.findById(qid)?.populate<{ options: Option[] }>('options')
+    if (qStem) {
+      const similarOptions = qStem.options
         .sort(
-          (a, b) =>
-            Compute.cosineSimilarity(b.embedding, option.embedding) -
-            Compute.cosineSimilarity(a.embedding, option.embedding)
+          (a, b) => Compute.cosineSimilarity(b.embedding, embedding) - Compute.cosineSimilarity(a.embedding, embedding)
         )
         .slice(0, 3)
 
       return similarOptions
     } else {
-      throw new Error('Option not found')
+      throw new Error('Qstem not found')
     }
   }
 
