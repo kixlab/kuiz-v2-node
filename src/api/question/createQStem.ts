@@ -5,6 +5,7 @@ export interface CreateQStemParams {
     uid: ID
     stem_text: string
     raw_string: string
+    explanation: string
     action_verb: string[]
     keyword: string[]
     cid: ID

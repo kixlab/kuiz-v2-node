@@ -7,6 +7,7 @@ interface QStemData {
   uid: string
   stem_text: string
   raw_string: string
+  explanation: string
   action_verb?: string[]
   keyword?: string[]
   cid: string
@@ -20,6 +21,7 @@ class QStemService {
     uid,
     stem_text,
     raw_string,
+    explanation,
     action_verb = [],
     keyword = [],
     cid,
@@ -31,6 +33,7 @@ class QStemService {
       author: uid,
       stem_text,
       raw_string,
+      explanation,
       action_verb,
       keyword,
       class: cid,

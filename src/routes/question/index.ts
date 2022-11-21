@@ -38,7 +38,7 @@ router.get('/load/cluster', loadCluster)
 router.post('/load/options', loadOptionInCluster)
 router.post('/organic/question/create', createFullQuestion)
 
-router.post('/submbitReport', submitReport)
+router.post('/submitReport', submitReport)
 router.post('/solve', solveQuestion)
 router.post('/addUpVote', addUpVote)
 router.post('/removeUpVote', removeUpVote)
