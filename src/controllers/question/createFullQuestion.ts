@@ -22,9 +22,10 @@ export const createFullQuestion = Post<CreateFullQuestionParams, CreateFullQuest
     const question = await qStemService.create({
       uid: qinfo.authorId,
       cid,
-      stem_text: explanation,
-      raw_string: explanation,
-      learning_objective: explanation,
+      stem_text: qinfo.authorId,
+      raw_string: qinfo.authorId,
+      learning_objective: qinfo.authorId,
+      explanation: qinfo.authorId,
     })
 
     const savedOptions = await Promise.all(
