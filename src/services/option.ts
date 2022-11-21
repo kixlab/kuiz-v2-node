@@ -2,6 +2,9 @@ import { Document, Types } from 'mongoose'
 import { Option, OptionModel } from '../db/option'
 import { QStemModel } from '../db/qstem'
 import { UserModel } from '../db/user'
+import { ID } from '../types/common'
+import { Compute } from '../utils/compute'
+import { languageModelService } from './languageModel'
 
 interface OptionData {
   uid: Types.ObjectId
@@ -15,6 +18,7 @@ interface OptionData {
 
 class OptionService {
   async create({ uid, qid, cid, optionText, isAnswer, explanation = '', keywords = [] }: OptionData) {
+    const embedding = await languageModelService.createEmbedding(optionText)
     const option = new OptionModel({
       author: uid,
       class: cid,
@@ -23,6 +27,7 @@ class OptionService {
       explanation,
       qstem: qid,
       keyWords: keywords,
+      embedding,
     })
     option.disjointSet = option.id
     await option.save()
@@ -35,6 +40,22 @@ class OptionService {
     })
 
     return option
+  }
+
+  async getSimilarOptions(qid: ID, optionText: string): Promise<Option[]> {
+    const embedding = await languageModelService.createEmbedding(optionText)
+    const qStem = await QStemModel.findById(qid)?.populate<{ options: Option[] }>('options')
+    if (qStem) {
+      const similarOptions = qStem.options
+        .sort(
+          (a, b) => Compute.cosineSimilarity(b.embedding, embedding) - Compute.cosineSimilarity(a.embedding, embedding)
+        )
+        .slice(0, 3)
+
+      return similarOptions
+    } else {
+      throw new Error('Qstem not found')
+    }
   }
 
   async getDisjointSets(qid: Types.ObjectId): Promise<[Option, Option[]][]> {

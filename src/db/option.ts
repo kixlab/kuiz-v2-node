@@ -25,6 +25,7 @@ export interface Option {
   liked: Types.ObjectId[]
   disliked: Types.ObjectId[]
   keyWords: string[]
+  embedding: number[]
 }
 
 const optionSchema = new Schema<Option>({
@@ -127,6 +128,10 @@ const optionSchema = new Schema<Option>({
   },
   keyWords: {
     type: [String],
+    default: [],
+  },
+  embedding: {
+    type: [Number],
     default: [],
   },
 })
