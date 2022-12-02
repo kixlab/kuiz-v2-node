@@ -1,7 +1,7 @@
 import { Option } from '../../../db/option'
 import { ID } from '../../../types/common'
 
-export interface MakeOptionParams {
+export interface OptionCreateParams {
   optionData: {
     author: ID
     option_text: string
@@ -14,6 +14,6 @@ export interface MakeOptionParams {
   similarOptions: ID[]
 }
 
-export interface MakeOptionResults {
+export interface OptionCreateResults {
   option: Option
 }

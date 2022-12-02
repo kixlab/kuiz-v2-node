@@ -12,10 +12,9 @@ const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser(Env.COOKIE_KEY))
-app.use(cors())
+app.use(cors({ origin: '*' }))
 app.use(logger())
 // app.use(cookieChecker())
-app.options('*', cors()) // Attach 'Access-Control-Allow-Origin' to preflight
 
 mongoose
   .connect(Env.DB_URL)
