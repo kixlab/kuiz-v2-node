@@ -13,7 +13,7 @@ import { loadProblemList } from '../../controllers/question/loadProblemList'
 import { loadCreatedOption } from '../../controllers/question/option/loadCreatedOption'
 import { loadOptionDetail } from '../../controllers/question/option/loadOptionDetail'
 import { loadOptions } from '../../controllers/question/option/loadOptions'
-import { makeOption } from '../../controllers/question/option/makeOption'
+import { optionCreate } from '../../controllers/question/option/optionCreate'
 import { makeOptionSet } from '../../controllers/question/option/makeOptionSet'
 import { setOptionDependency } from '../../controllers/question/option/setOptionDependency'
 import { removeDownVote } from '../../controllers/question/removeDownVote'
@@ -26,7 +26,7 @@ const router = express.Router()
 
 router.get('/option/load', loadOptions)
 router.get('/optiondetail/load', loadOptionDetail)
-router.post('/option/create', makeOption)
+router.post('/option/create', optionCreate)
 router.post('/optionset/create', makeOptionSet)
 router.post('/option/dependency', setOptionDependency)
 router.post('/qstem/create', createQStem)

@@ -1,9 +1,11 @@
 import { Types } from 'mongoose'
-import { MakeOptionParams, MakeOptionResults } from '../../../api/question/option/makeOption'
+import { OptionCreateParams, OptionCreateResults } from '../../../api/question/option/optionCreate'
 import { optionService } from '../../../services/option'
 import { Post } from '../../methods'
 
-export const makeOption = Post<MakeOptionParams, MakeOptionResults>(async ({ optionData, similarOptions }) => {
+export const optionCreate = Post<OptionCreateParams, OptionCreateResults>(async ({ optionData, similarOptions }) => {
+  console.log(optionData)
+
   const option = await optionService.create({
     uid: new Types.ObjectId(optionData.author),
     cid: new Types.ObjectId(optionData.class),
